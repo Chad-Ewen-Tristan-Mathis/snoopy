@@ -1,3 +1,3 @@
-C:/Users/mathi/CLionProjects/snoopy/cmake-build-debug/CMakeFiles/snoopy.dir
-C:/Users/mathi/CLionProjects/snoopy/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/mathi/CLionProjects/snoopy/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Users/mathi/OneDrive/Documents/snoopy/cmake-build-debug/CMakeFiles/snoopy.dir
+C:/Users/mathi/OneDrive/Documents/snoopy/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mathi/OneDrive/Documents/snoopy/cmake-build-debug/CMakeFiles/rebuild_cache.dir
