@@ -5,19 +5,14 @@
 
 #include "tools.h"
 
-char *lire_fichier_texte(char *path)
+void afficher_fichier(char *path)
 {
     FILE *fichier = fopen(path, "r");
 
-    char *texte[2000];
     char c;
-    int i = 0;
-
+    printf("Lecture fichier %s", path);
     while( (c = fgetc(fichier)) != EOF ) {
-        *texte[i] = c;
-        i++;
+        printf("%c", c);
     };
-
     fclose(fichier);
-    return texte;
 }

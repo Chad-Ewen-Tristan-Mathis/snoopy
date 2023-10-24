@@ -5,6 +5,6 @@
 #ifndef SNOOPY_TOOLS_H
 #define SNOOPY_TOOLS_H
 
-char *lire_fichier_texte(char *path);
+void afficher_fichier(char *path);
 
 #endif //SNOOPY_TOOLS_H
