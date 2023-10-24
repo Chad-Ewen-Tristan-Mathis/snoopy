@@ -1,7 +1,8 @@
 #include <stdio.h>
-#include "tools.h"
+#include "menu.h"
 
 int main() {
-    afficher_fichier("../assets/menu.txt");
+    menu();
+
     return 0;
 }
