@@ -9,10 +9,14 @@ void afficher_fichier(char *path)
 {
     FILE *fichier = fopen(path, "r");
 
-    char c;
-    printf("Lecture fichier %s", path);
-    while( (c = fgetc(fichier)) != EOF ) {
+    if(fichier == NULL) {
+        perror("Impossible d'ouvrir le fichier");
+    }
+
+    char c = fgetc(fichier);
+    while( c != EOF ) {
         printf("%c", c);
+        c = fgetc(fichier);
     };
     fclose(fichier);
 }
