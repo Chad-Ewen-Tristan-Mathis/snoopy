@@ -11,3 +11,5 @@
         4. Charger un niveau
         5. Scores
         6. Quitter
+
+SELECTIONNEZ UNE OPTION:
