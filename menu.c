@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "menu.h"
 #include "tools.h"
@@ -47,5 +48,6 @@ void charger_niveau() {}
 void scores() {}
 void quitter() {
     afficher_fichier("../assets/quitter.txt");
+    sleep(2000);
     exit(0);
-};
+}
