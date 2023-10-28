@@ -6,7 +6,8 @@
 
 int main() {
     COULEUR(3, 0);
-    afficher_niveau("1");
+    lire_niveau("../assets/niveaux/1.txt");
+
     sleep(5000);
     return 0;
 }

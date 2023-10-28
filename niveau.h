@@ -3,6 +3,15 @@
 #ifndef SNOOPY_NIVEAU_H
 #define SNOOPY_NIVEAU_H
 
-void afficher_niveau(char *niveau);
+struct ModeleNiveau {
+    int **modele;
+    int largeur;
+    int hauteur;
+};
+
+void lire_niveau(char *path);
+void afficher_niveau(struct ModeleNiveau modele);
+struct ModeleNiveau modele_niveau(char *path);
+int *dimensions_niveau(char *path);
 
 #endif //SNOOPY_NIVEAU_H

@@ -30,7 +30,7 @@ void menu() {
     }
 };
 void afficher_menu() {
-    afficher_fichier("../assets/menu.txt", 0);
+    afficher_fichier("../assets/menu.txt");
 }
 int selectionne_option() {
     int option;
@@ -40,14 +40,14 @@ int selectionne_option() {
 
 void afficher_regles() {
     system("cls");
-    afficher_fichier("../assets/regles.txt", 0);
+    afficher_fichier("../assets/regles.txt");
 }
 void nouvelle_partie() {}
 void charger_partie() {}
 void charger_niveau() {}
 void scores() {}
 void quitter() {
-    afficher_fichier("../assets/quitter.txt", 0);
+    afficher_fichier("../assets/quitter.txt");
     sleep(2000);
     exit(0);
 }
