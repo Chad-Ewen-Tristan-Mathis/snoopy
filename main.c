@@ -1,12 +1,14 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <locale.h>
 #include "menu.h"
 #include "tools.h"
 #include "niveau.h"
 
 int main() {
     COULEUR(3, 0);
-    lire_niveau("../assets/niveaux/1.txt");
+    afficher_fichier("../assets/logo.txt");
+    menu();
 
     sleep(5000);
     return 0;

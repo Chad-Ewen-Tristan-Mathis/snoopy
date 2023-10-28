@@ -55,8 +55,20 @@ void afficher_niveau(struct ModeleNiveau modele)
 {
     for(int i = 0; i < modele.hauteur; i++) {
         for(int j = 0; j < modele.largeur; j++) {
-            if(modele.modele[i][j] == 0) printf(" ");
-            else printf("%d", modele.modele[i][j]);
+            switch(modele.modele[i][j]) {
+                case 0:
+                    printf(" ");
+                    break;
+                case 1:
+                    printf("%c", 176);
+                    break;
+                case 4:
+                    printf("%c", 219);
+                    break;
+                default:
+                    printf("%d", modele.modele[i][j]);
+                    break;
+            }
         }
         printf("\n");
     }

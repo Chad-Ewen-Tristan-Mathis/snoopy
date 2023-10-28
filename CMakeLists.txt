@@ -7,4 +7,5 @@ add_executable(snoopy main.c
         tools.h
         tools.c
         menu.c
-        niveau.c)
+        niveau.c
+        partie.c)

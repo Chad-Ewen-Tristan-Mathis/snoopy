@@ -4,6 +4,7 @@
 
 #include "menu.h"
 #include "tools.h"
+#include "niveau.h"
 
 void menu() {
     afficher_menu();
@@ -41,8 +42,13 @@ int selectionne_option() {
 void afficher_regles() {
     system("cls");
     afficher_fichier("../assets/regles.txt");
+    menu();
 }
-void nouvelle_partie() {}
+void nouvelle_partie() {
+    system("cls");
+    afficher_fichier("../assets/nouvelle_partie.txt");
+    lire_niveau("../assets/niveaux/1.txt");
+}
 void charger_partie() {}
 void charger_niveau() {}
 void scores() {}
