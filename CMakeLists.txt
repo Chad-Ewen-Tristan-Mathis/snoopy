@@ -6,4 +6,5 @@ set(CMAKE_C_STANDARD 11)
 add_executable(snoopy main.c
         tools.h
         tools.c
-        menu.c)
+        menu.c
+        niveau.c)

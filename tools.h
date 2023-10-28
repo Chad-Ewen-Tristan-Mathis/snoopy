@@ -5,6 +5,8 @@
 #ifndef SNOOPY_TOOLS_H
 #define SNOOPY_TOOLS_H
 
-void afficher_fichier(char *path);
+void afficher_fichier(char *path, int isLevel);
+char *concat(char* chaines[], int taille);
+void COULEUR(int couleurDuTexte,int couleurDeFond);
 
 #endif //SNOOPY_TOOLS_H
