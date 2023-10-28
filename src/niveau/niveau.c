@@ -5,7 +5,7 @@
 #include <string.h>
 #include <malloc.h>
 #include "niveau.h"
-#include "tools.h"
+#include "../tools/tools.h"
 
 int *dimensions_niveau(char *path) {
     FILE *fichier = fopen(path, "r");

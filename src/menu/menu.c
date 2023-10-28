@@ -3,8 +3,8 @@
 #include <unistd.h>
 
 #include "menu.h"
-#include "tools.h"
-#include "niveau.h"
+#include "../tools/tools.h"
+#include "../niveau/niveau.h"
 
 void menu() {
     afficher_menu();
