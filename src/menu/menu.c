@@ -5,6 +5,7 @@
 #include "menu.h"
 #include "../tools/tools.h"
 #include "../niveau/niveau.h"
+#include "../partie/partie.h"
 
 void menu() {
     afficher_menu();
@@ -43,11 +44,6 @@ void afficher_regles() {
     system("cls");
     afficher_fichier("../assets/regles.txt");
     menu();
-}
-void nouvelle_partie() {
-    system("cls");
-    afficher_fichier("../assets/nouvelle_partie.txt");
-    lire_niveau("../assets/niveaux/1.txt");
 }
 void charger_partie() {}
 void charger_niveau() {}

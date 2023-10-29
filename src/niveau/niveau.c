@@ -74,7 +74,8 @@ void afficher_niveau(struct ModeleNiveau modele)
     }
 }
 
-void lire_niveau(char *path) {
+struct ModeleNiveau lire_niveau(char *path) {
     struct ModeleNiveau modele = modele_niveau(path);
     afficher_niveau(modele);
+    return modele;
 }

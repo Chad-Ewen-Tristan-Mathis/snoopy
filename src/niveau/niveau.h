@@ -9,7 +9,7 @@ struct ModeleNiveau {
     int hauteur;
 };
 
-void lire_niveau(char *path);
+struct ModeleNiveau lire_niveau(char *path);
 void afficher_niveau(struct ModeleNiveau modele);
 struct ModeleNiveau modele_niveau(char *path);
 int *dimensions_niveau(char *path);

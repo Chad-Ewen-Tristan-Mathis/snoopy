@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <unistd.h>
-#include <locale.h>
-#include "menu/menu.h"
-#include "tools/tools.h"
-#include "niveau/niveau.h"
+
+#include "src/menu/menu.h"
+#include "src/tools/tools.h"
+#include "src/niveau/niveau.h"
 
 int main() {
     COULEUR(3, 0);

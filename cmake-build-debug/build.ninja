@@ -55,29 +55,29 @@ build CMakeFiles/snoopy.dir/main.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:/U
   OBJECT_DIR = CMakeFiles\snoopy.dir
   OBJECT_FILE_DIR = CMakeFiles\snoopy.dir
 
-build CMakeFiles/snoopy.dir/tools.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:/Users/mathi/OneDrive/Documents/snoopy/tools.c || cmake_object_order_depends_target_snoopy
-  DEP_FILE = CMakeFiles\snoopy.dir\tools.c.obj.d
+build CMakeFiles/snoopy.dir/src/tools/tools.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:/Users/mathi/OneDrive/Documents/snoopy/src/tools/tools.c || cmake_object_order_depends_target_snoopy
+  DEP_FILE = CMakeFiles\snoopy.dir\src\tools\tools.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\snoopy.dir
-  OBJECT_FILE_DIR = CMakeFiles\snoopy.dir
+  OBJECT_FILE_DIR = CMakeFiles\snoopy.dir\src\tools
 
-build CMakeFiles/snoopy.dir/menu.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:/Users/mathi/OneDrive/Documents/snoopy/menu.c || cmake_object_order_depends_target_snoopy
-  DEP_FILE = CMakeFiles\snoopy.dir\menu.c.obj.d
+build CMakeFiles/snoopy.dir/src/menu/menu.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:/Users/mathi/OneDrive/Documents/snoopy/src/menu/menu.c || cmake_object_order_depends_target_snoopy
+  DEP_FILE = CMakeFiles\snoopy.dir\src\menu\menu.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\snoopy.dir
-  OBJECT_FILE_DIR = CMakeFiles\snoopy.dir
+  OBJECT_FILE_DIR = CMakeFiles\snoopy.dir\src\menu
 
-build CMakeFiles/snoopy.dir/niveau.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:/Users/mathi/OneDrive/Documents/snoopy/niveau.c || cmake_object_order_depends_target_snoopy
-  DEP_FILE = CMakeFiles\snoopy.dir\niveau.c.obj.d
+build CMakeFiles/snoopy.dir/src/niveau/niveau.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:/Users/mathi/OneDrive/Documents/snoopy/src/niveau/niveau.c || cmake_object_order_depends_target_snoopy
+  DEP_FILE = CMakeFiles\snoopy.dir\src\niveau\niveau.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\snoopy.dir
-  OBJECT_FILE_DIR = CMakeFiles\snoopy.dir
+  OBJECT_FILE_DIR = CMakeFiles\snoopy.dir\src\niveau
 
-build CMakeFiles/snoopy.dir/partie.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:/Users/mathi/OneDrive/Documents/snoopy/partie.c || cmake_object_order_depends_target_snoopy
-  DEP_FILE = CMakeFiles\snoopy.dir\partie.c.obj.d
+build CMakeFiles/snoopy.dir/src/partie/partie.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:/Users/mathi/OneDrive/Documents/snoopy/src/partie/partie.c || cmake_object_order_depends_target_snoopy
+  DEP_FILE = CMakeFiles\snoopy.dir\src\partie\partie.c.obj.d
   FLAGS = -g -std=gnu11 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\snoopy.dir
-  OBJECT_FILE_DIR = CMakeFiles\snoopy.dir
+  OBJECT_FILE_DIR = CMakeFiles\snoopy.dir\src\partie
 
 
 # =============================================================================
@@ -87,7 +87,7 @@ build CMakeFiles/snoopy.dir/partie.c.obj: C_COMPILER__snoopy_unscanned_Debug C$:
 #############################################
 # Link the executable snoopy.exe
 
-build snoopy.exe: C_EXECUTABLE_LINKER__snoopy_Debug CMakeFiles/snoopy.dir/main.c.obj CMakeFiles/snoopy.dir/tools.c.obj CMakeFiles/snoopy.dir/menu.c.obj CMakeFiles/snoopy.dir/niveau.c.obj CMakeFiles/snoopy.dir/partie.c.obj
+build snoopy.exe: C_EXECUTABLE_LINKER__snoopy_Debug CMakeFiles/snoopy.dir/main.c.obj CMakeFiles/snoopy.dir/src/tools/tools.c.obj CMakeFiles/snoopy.dir/src/menu/menu.c.obj CMakeFiles/snoopy.dir/src/niveau/niveau.c.obj CMakeFiles/snoopy.dir/src/partie/partie.c.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\snoopy.dir
