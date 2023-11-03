@@ -85,7 +85,7 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant)
     for(int i = 1; i < modele.hauteur-1; i++) {
         for(int j = 0; j < modele.largeur; j++) {
             if(j == 0) {
-                affiche_unite(2*(modele.hauteur-1 + modele.largeur-1) - i, unites_rouges);
+                affiche_unite(2*(modele.hauteur + modele.largeur - 2) - i, unites_rouges);
             } else if(j == modele.largeur-1) {
                 int z = affiche_unite(indice_unite, unites_rouges);
                 if(z) indice_unite++;
