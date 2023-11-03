@@ -7,6 +7,21 @@
 #include "niveau.h"
 #include "../tools/tools.h"
 
+
+int affiche_unite(int indice, int unites_rouges) {
+    if(indice < unites_rouges) {
+        COULEUR(4, 0);
+        printf("#");
+        COULEUR(3, 0);
+        return 1;
+    } else {
+        COULEUR(2, 0);
+        printf("#");
+        COULEUR(3, 0);
+        return 0;
+    }
+}
+
 int *dimensions_niveau(char *path) {
     FILE *fichier = fopen(path, "r");
     if(fichier == NULL) {
@@ -17,6 +32,7 @@ int *dimensions_niveau(char *path) {
     int *dimensions = malloc(2 * sizeof(int));
 
     fgets(ligne, sizeof ligne, fichier);
+
     dimensions[0] = strlen(ligne)-1;
     dimensions[1] = 1;
 
@@ -51,31 +67,51 @@ struct ModeleNiveau modele_niveau(char *path) {
     return result;
 }
 
-void afficher_niveau(struct ModeleNiveau modele)
+void afficher_niveau(struct ModeleNiveau modele, int temps_restant)
 {
-    for(int i = 0; i < modele.hauteur; i++) {
+//    Affichage niveau + chrono
+    float temps_restant_prct = (float)(temps_restant * 100) / (float)120;
+    int unites_rouges = (modele.hauteur-1)*2+(modele.largeur-1)*2 - unite_chrono_restant(temps_restant_prct, modele.hauteur, modele.largeur);
+    int indice_unite = 0;
+
+    for(int k = 0; k < modele.largeur; k++) {
+        int z = affiche_unite(indice_unite, unites_rouges);
+        if(z) indice_unite++;
+    }
+    printf("\n");
+
+
+
+    for(int i = 1; i < modele.hauteur-1; i++) {
         for(int j = 0; j < modele.largeur; j++) {
-            switch(modele.modele[i][j]) {
-                case 0:
-                    printf(" ");
-                    break;
-                case 1:
-                    printf("%c", 176);
-                    break;
-                case 4:
-                    printf("%c", 219);
-                    break;
-                default:
-                    printf("%d", modele.modele[i][j]);
-                    break;
+            if(j == 0) {
+                affiche_unite(2*(modele.hauteur-1 + modele.largeur-1) - i, unites_rouges);
+            } else if(j == modele.largeur-1) {
+                int z = affiche_unite(indice_unite, unites_rouges);
+                if(z) indice_unite++;
+            } else {
+                char symboles[10] = {
+                        ' ', '~', '+', '~', '#', '@', '=', 'O', 'X', '^'
+                };
+                printf("%c", symboles[modele.modele[i][j]]);
             }
         }
         printf("\n");
     }
+    for(int k = 0; k<modele.largeur; k++) {
+        int z = affiche_unite(indice_unite+modele.largeur-k, unites_rouges);
+        if(z) indice_unite++;
+    }
+    printf("\n");
+}
+
+int unite_chrono_restant(int prct_restant, int hauteur, int largeur) {
+    int unites = (largeur-1)*2 + (hauteur-1)*2;
+    return (unites * prct_restant) / 100;
 }
 
 struct ModeleNiveau lire_niveau(char *path) {
     struct ModeleNiveau modele = modele_niveau(path);
-    afficher_niveau(modele);
+//    afficher_niveau(modele);
     return modele;
 }

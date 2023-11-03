@@ -8,4 +8,6 @@ add_executable(snoopy main.c
         src/tools/tools.c
         src/menu/menu.c
         src/niveau/niveau.c
-        src/partie/partie.c)
+        src/partie/partie.c
+        src/chrono/chrono.c
+)
