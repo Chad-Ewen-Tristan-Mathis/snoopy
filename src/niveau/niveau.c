@@ -48,6 +48,10 @@ struct ModeleNiveau modele_niveau(char *path) {
 
     int **modele = malloc(dimensions[1] * sizeof(int *));
 
+    struct Coordonnees snoopy = {0, 0};
+    struct Coordonnees *oiseaux = malloc(4 * sizeof(struct Coordonnees));
+    int nb_oiseaux = 0;
+
     FILE *fichier = fopen(path, "r");
     if(fichier == NULL) {
         perror("Impossible d'ouvrir le fichier");
@@ -56,14 +60,25 @@ struct ModeleNiveau modele_niveau(char *path) {
         modele[i] = malloc(dimensions[0] * sizeof(int));
         for(int j = 0; j < dimensions[0]; j++) {
             char c = fgetc(fichier);
-            if(c == '\n') {
-                c = fgetc(fichier);
+            switch (c) {
+                case '\n':
+                    c = fgetc(fichier);
+                    break;
+                case '8':
+                    snoopy.x = j;
+                    snoopy.y = i;
+                    break;
+                case '9':
+                    oiseaux[nb_oiseaux].x = j;
+                    oiseaux[nb_oiseaux].y = i;
+                    nb_oiseaux++;
+                    break;
             }
             modele[i][j] = (c-'0');
         }
     }
 
-    struct ModeleNiveau result = {modele, dimensions[0], dimensions[1]};
+    struct ModeleNiveau result = {modele, dimensions[0], dimensions[1], snoopy, oiseaux};
     return result;
 }
 
@@ -110,8 +125,3 @@ int unite_chrono_restant(int prct_restant, int hauteur, int largeur) {
     return (unites * prct_restant) / 100;
 }
 
-struct ModeleNiveau lire_niveau(char *path) {
-    struct ModeleNiveau modele = modele_niveau(path);
-//    afficher_niveau(modele);
-    return modele;
-}
