@@ -22,8 +22,8 @@ void nouvelle_partie() {
         if(menu_principal == 1) break;
         if(pause != 0) continue;
         system("cls");
-        afficher_vies(niveau.vies_restantes);
         afficher_niveau(niveau, temps_arrivee - (int) time(NULL));
+        afficher_vies(niveau.vies_restantes);
         usleep(250000); // (0.25s)
     }
     system("cls");
