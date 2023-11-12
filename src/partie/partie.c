@@ -22,8 +22,9 @@ void jeu(struct ModeleNiveau modele) {
     int pause = 0;
     int menu_principal = 0;
 
+    char derniere_direction = ' ';
     while((temps_arrivee - (int) time(NULL) > 0 || pause != 0) && nombre_oiseaux(modele) > 0) {
-        handleKeypress(&modele, &temps_arrivee, &pause, &menu_principal);
+        handleKeypress(&modele, &temps_arrivee, &pause, &menu_principal, &derniere_direction);
         if(menu_principal == 1) break;
         if(pause != 0) continue;
         system("cls");
@@ -33,14 +34,14 @@ void jeu(struct ModeleNiveau modele) {
     }
     if(menu_principal == 1) {
         system("cls");
-        afficher_fichier("../assets/logo.txt");
+        afficher_fichier("../assets/ASCII/logo.txt");
         menu();
     } else if(nombre_oiseaux(modele) <= 0) {
         int temps_restant = temps_arrivee - (int) time(NULL);
         float temps_restant_prct = (float)(temps_restant * 100) / (float)120;
         modele.score += temps_restant*100;
         system("cls");
-        afficher_fichier("../assets/victoire.txt");
+        afficher_fichier("../assets/ASCII/victoire.txt");
         printf("\n\nScore du niveau %d : %d\n", modele.niveau, temps_restant*100);
         printf("Temps restant : %d (%.2f%%)\n", temps_restant, temps_restant_prct);
         printf("Nombre de vies restantes : %d\n", modele.vies_restantes);
@@ -57,9 +58,37 @@ void jeu(struct ModeleNiveau modele) {
         modele.score = score;
         modele.vies_restantes = vies;
 
-        char *chemin = "../assets/sauvegardes/sauvegarde_temporaire.txt";
+        sauvegarder_partie(modele, 120, "../assets/ASCII/sauvegardes/sauvegarde_temporaire.txt");
+        charger_sauvegarde("sauvegarde_temporaire", 0);
+    } else if(temps_arrivee - (int) time(NULL) <= 0) {
+        system("cls");
+        afficher_fichier("../assets/ASCII/defaite.txt");
+        printf("\n\nNombre de vies restantes : %d\n", --modele.vies_restantes);
+        printf("Score total : %d\n", modele.score);
 
-        sauvegarder_partie(modele, 120, chemin);
+        if(modele.vies_restantes <= 0) {
+            printf("Appuyez sur une touche pour retourner au menu principal...\n");
+            sleep(1);
+            while(!kbhit());
+            system("cls");
+            afficher_fichier("../assets/ASCII/logo.txt");
+            menu();
+            return;
+        }
+
+        printf("Appuyez sur une touche pour ressayer le niveau...\n");
+        sleep(1);
+        while(!kbhit());
+
+        int score = modele.score;
+        int vies = modele.vies_restantes;
+        char nouveau_niveau[10];
+        sprintf(nouveau_niveau, "%d", modele.niveau);
+        modele = modele_niveau(nouveau_niveau, 0);
+        modele.score = score;
+        modele.vies_restantes = vies;
+
+        sauvegarder_partie(modele, 120, "../assets/sauvegardes/sauvegarde_temporaire.txt");
         charger_sauvegarde("sauvegarde_temporaire", 0);
     }
 }
@@ -67,7 +96,7 @@ void jeu(struct ModeleNiveau modele) {
 void afficher_vies(int vies) {
 //    tableau de 3 fichiers
     FILE *fichiers[3];
-    for(int i=0; i<vies; i++) fichiers[i] = fopen("../assets/coeur.txt", "r");
+    for(int i=0; i<vies; i++) fichiers[i] = fopen("../assets/ASCII/coeur.txt", "r");
 
     char ligne[100];
     int fin = 0;

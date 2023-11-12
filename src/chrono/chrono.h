@@ -1,7 +1,3 @@
-//
-// Created by mathi on 03/11/2023.
-//
-
 #ifndef SNOOPY_CHRONO_H
 #define SNOOPY_CHRONO_H
 

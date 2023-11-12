@@ -1,7 +1,3 @@
-//
-// Created by mathi on 06/11/2023.
-//
-
 #include "../niveau/niveau.h"
 
 #ifndef SNOOPY_SAUVEGARDES_H

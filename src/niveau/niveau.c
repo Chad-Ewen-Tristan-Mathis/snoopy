@@ -1,6 +1,3 @@
-//
-// Created by mathi on 24/10/2023.
-//
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
@@ -67,7 +64,7 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
             printf("Votre partie est terminee !");
             sleep(3);
             system("cls");
-            afficher_fichier("../assets/logo.txt");
+            afficher_fichier("../assets/ASCII/logo.txt");
             menu();
         }
     }

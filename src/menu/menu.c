@@ -50,14 +50,14 @@ int selectionne_option() {
 
 void afficher_regles() {
     system("cls");
-    afficher_fichier("../assets/regles.txt");
+    afficher_fichier("../assets/ASCII/regles.txt");
     menu();
 }
 
 void charger_niveau() {}
 void scores() {}
 void quitter() {
-    afficher_fichier("../assets/quitter.txt");
+    afficher_fichier("../assets/ASCII/quitter.txt");
     sleep(1);
     exit(0);
 }

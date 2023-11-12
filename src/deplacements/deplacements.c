@@ -18,7 +18,8 @@ int getCaseValue(struct ModeleNiveau modele, int x, int y) {
     return modele.modele[y][x];
 }
 
-void deplacer(struct ModeleNiveau *modele, int direction) {
+void deplacer(struct ModeleNiveau *modele, char direction, char *derniere_direction) {
+    *derniere_direction = direction;
     int add_x = 0;
     int add_y = 0;
     switch (direction) {
@@ -36,7 +37,7 @@ void deplacer(struct ModeleNiveau *modele, int direction) {
             break;
     }
     int nouvelle_case = getCaseValue(*modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y);
-    if(nouvelle_case == 0 || nouvelle_case == 1 || nouvelle_case == 2 && pousse_bloc(modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y, direction)) {
+    if(nouvelle_case == 0 || nouvelle_case == 2 && pousse_bloc(modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y, direction)) {
         modele->modele[modele->snoopy.y][modele->snoopy.x] = 0;
         modele->snoopy.y += add_y;
         modele->snoopy.x += add_x;
@@ -58,6 +59,26 @@ void deplacer(struct ModeleNiveau *modele, int direction) {
     }
 }
 
+void casse_bloc(struct ModeleNiveau *modele, char *direction) {
+    int add_x = 0;
+    int add_y = 0;
+    switch (*direction) {
+        case 'z':
+            add_y = -1;
+            break;
+        case 'q':
+            add_x = -1;
+            break;
+        case 's':
+            add_y = 1;
+            break;
+        case 'd':
+            add_x = 1;
+            break;
+    }
+    int nouvelle_case = getCaseValue(*modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y);
+    if(nouvelle_case == 1) modele->modele[modele->snoopy.y+add_y][modele->snoopy.x+add_x] = 0;
+}
 int pousse_bloc(struct ModeleNiveau *modele, int x, int y, int direction) {
     int add_x = 0;
     int add_y = 0;

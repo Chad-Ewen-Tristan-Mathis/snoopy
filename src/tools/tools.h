@@ -1,7 +1,3 @@
-//
-// Created by mathi on 23/10/2023.
-//
-
 #ifndef SNOOPY_TOOLS_H
 #define SNOOPY_TOOLS_H
 

@@ -22,7 +22,7 @@ struct ModeleNiveau charger_sauvegarde(char *id, int code) {
     char nouvel_id[50];
     if(code == -1) {
         system("cls");
-        afficher_fichier("../assets/charger_partie.txt");
+        afficher_fichier("../assets/ASCII/charger_partie.txt");
         printf("Veuillez entrer l'id de la sauvegarde : \n");
         scanf("%s", nouvel_id);
         return charger_sauvegarde(nouvel_id, 0);

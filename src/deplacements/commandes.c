@@ -11,7 +11,7 @@
 #include "../sauvegardes/sauvegardes.h"
 #include "../tools/tools.h"
 
-void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause, int *menu_principal) {
+void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause, int *menu_principal, char *derniere_direction) {
     if(kbhit()) {
         switch(getch()) {
             case 'p':
@@ -31,20 +31,24 @@ void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause,
                 char *nom = demande_sauvegarde_id();
                 sauvegarder_partie(*modele, *temps_arrivee - pause_timestamp, nom);
                 break;
+            case 32: // Espace
+                if(*pause != 0) break;
+                casse_bloc(modele, derniere_direction);
+                break;
             case 224:
                 if(*pause != 0) break;
                 switch (getch()) {
                     case 72: // Haut
-                        deplacer(modele, 'z');
+                        deplacer(modele, 'z', derniere_direction);
                         break;
                     case 80: // Bas
-                        deplacer(modele, 's');
+                        deplacer(modele, 's', derniere_direction);
                         break;
                     case 75: // Gauche
-                        deplacer(modele, 'q');
+                        deplacer(modele, 'q', derniere_direction);
                         break;
                     case 77: // Droite
-                        deplacer(modele, 'd');
+                        deplacer(modele, 'd', derniere_direction);
                         break;
                 }
                 break;
