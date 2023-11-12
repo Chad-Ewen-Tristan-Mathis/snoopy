@@ -48,17 +48,18 @@ void jeu(struct ModeleNiveau modele) {
         wprintf(L"Score total : %d\n", modele.score);
         wprintf(L"Appuyez sur une touche pour continuer...\n");
         sleep(1);
-        while(!kbhit());
+        while(!kbhit()) usleep(250000);
 
         int score = modele.score;
         int vies = modele.vies_restantes;
         char nouveau_niveau[10];
         sprintf(nouveau_niveau, "%d", modele.niveau+1);
+
         modele = modele_niveau(nouveau_niveau, 0);
         modele.score = score;
         modele.vies_restantes = vies;
 
-        sauvegarder_partie(modele, 120, "../assets/ASCII/sauvegardes/sauvegarde_temporaire.txt");
+        sauvegarder_partie(modele, 120, "../assets/sauvegardes/sauvegarde_temporaire.txt");
         charger_sauvegarde("sauvegarde_temporaire", 0);
     } else if(temps_arrivee - (int) time(NULL) <= 0) {
         system("cls");
