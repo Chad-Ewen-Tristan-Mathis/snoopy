@@ -110,18 +110,8 @@ void tapis_roulant(struct ModeleNiveau *modele, int x, int y, int direction) {
             break;
     }
     int nouvelle_case = getCaseValue(*modele, x+add_x, y+add_y);
-    if(nouvelle_case == 0) {
+    if(nouvelle_case == 0 || nouvelle_case == 1 || (nouvelle_case == 2 && pousse_bloc(modele, x+add_x, y+add_y, direction))) {
         modele->modele[y][x] = 0;
-        modele->snoopy.y += add_y*2;
-        modele->snoopy.x += add_x*2;
-        modele->modele[modele->snoopy.y][modele->snoopy.x] = 8;
-    } else if(nouvelle_case == 1) {
-        modele->modele[modele->snoopy.y][modele->snoopy.x] = 0;
-        modele->snoopy.y += add_y*2;
-        modele->snoopy.x += add_x*2;
-        modele->modele[modele->snoopy.y][modele->snoopy.x] = 8;
-    } else if(nouvelle_case == 2 && pousse_bloc(modele, modele->snoopy.x + add_x, modele->snoopy.y + add_y, direction)) {
-        modele->modele[modele->snoopy.y][modele->snoopy.x] = 0;
         modele->snoopy.y += add_y*2;
         modele->snoopy.x += add_x*2;
         modele->modele[modele->snoopy.y][modele->snoopy.x] = 8;
