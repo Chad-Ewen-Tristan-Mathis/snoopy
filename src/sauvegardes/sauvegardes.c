@@ -35,52 +35,16 @@ struct ModeleNiveau charger_sauvegarde(char *id, int code) {
         if(!sauvegarde_id_valide(id))
             return charger_sauvegarde(nouvel_id, -2);
         else {
-            system("cls");
             struct ModeleNiveau sauvegarde = modele_niveau(id, 1);
-
-            int temps_arrivee = nouveau_chrono() - 120 + sauvegarde.temps_restant;
-            int pause = 0;
-            int menu_principal = 0;
-
-            while(temps_arrivee - (int) time(NULL) > 0 || pause != 0) {
-                handleKeypress(&sauvegarde, &temps_arrivee, &pause, &menu_principal);
-                if(menu_principal == 1) break;
-                if(pause != 0) continue;
-                system("cls");
-                afficher_niveau(sauvegarde, temps_arrivee - (int) time(NULL));
-                afficher_vies(sauvegarde.vies_restantes);
-                usleep(250000); // (0.25s)
-            }
-            system("cls");
-            afficher_fichier("../assets/logo.txt");
-            menu();
+            jeu(sauvegarde);
         }
     }
 }
 
-void sauvegarder_partie(struct ModeleNiveau modele, int temps_arrivee, int *menu_principal) {
-    int pause_timestamp = (int) time(NULL);
-    *menu_principal = 1;
-    system("cls");
-    char nom[50];
-    printf("Veuillez entrer le nom de la sauvegarde :");
-    scanf("%s", nom);
 
-    char chemin[100];
-    sprintf(chemin, "../assets/sauvegardes/%s.txt", nom);
-
-    if(access(chemin, F_OK) != -1) {
-        printf("Une sauvegarde avec ce nom existe deja, voulez vous l'ecraser ? (o/n)\n");
-        char reponse;
-        scanf("%c", &reponse);
-        if(reponse == 'n') {
-            sauvegarder_partie(modele, temps_arrivee, menu_principal);
-            return;
-        }
-    }
-
+void sauvegarder_partie(struct ModeleNiveau modele, int temps_restant, char* chemin) {
     FILE *fichier = fopen(chemin, "w");
-    fprintf(fichier, "%d\n", temps_arrivee - pause_timestamp);
+    fprintf(fichier, "%d\n", temps_restant);
     fprintf(fichier, "%d\n", modele.niveau);
     fprintf(fichier, "%d\n", modele.vies_restantes);
     fprintf(fichier, "%d", modele.score);
@@ -92,4 +56,22 @@ void sauvegarder_partie(struct ModeleNiveau modele, int temps_arrivee, int *menu
         }
     }
     fclose(fichier);
+}
+
+char *demande_sauvegarde_id() {
+    char *nom = malloc(50 * sizeof(char));
+    printf("Veuillez entrer le nom de la sauvegarde :");
+    scanf("%s", nom);
+
+    char chemin[100];
+    sprintf(chemin, "../assets/sauvegardes/%s.txt", nom);
+
+    if(access(chemin, F_OK) != -1) {
+        printf("Une sauvegarde avec ce nom existe deja, voulez vous l'ecraser ? (o/n)\n");
+        char reponse;
+        scanf("%c", &reponse);
+        if(reponse == 'n') return demande_sauvegarde_id();
+    }
+
+    return nom;
 }

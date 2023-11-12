@@ -11,7 +11,7 @@
 #include "../sauvegardes/sauvegardes.h"
 #include "../tools/tools.h"
 
-void handleKeypress(struct ModeleNiveau *modele, int *chrono, int *pause, int *menu_principal) {
+void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause, int *menu_principal) {
     if(kbhit()) {
         switch(getch()) {
             case 'p':
@@ -19,12 +19,17 @@ void handleKeypress(struct ModeleNiveau *modele, int *chrono, int *pause, int *m
                     *pause = (int) time(NULL);
                     printf("Pause\n");
                 } else {
-                    *chrono += (int) time(NULL) - *pause;
+                    *temps_arrivee += (int) time(NULL) - *pause;
                     *pause = 0;
                 }
                 break;
             case 's':
-                sauvegarder_partie(*modele, *chrono, menu_principal);
+                ;int pause_timestamp = (int) time(NULL);
+                *menu_principal = 1;
+                system("cls");
+
+                char *nom = demande_sauvegarde_id();
+                sauvegarder_partie(*modele, *temps_arrivee - pause_timestamp, nom);
                 break;
             case 224:
                 if(*pause != 0) break;

@@ -15,6 +15,7 @@ struct ModeleNiveau {
     int niveau;
     int temps_restant;
     int vies_restantes;
+    int nb_oiseaux;
     int score;
     struct Coordonnees snoopy;
     struct Coordonnees *oiseaux;
@@ -26,5 +27,6 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde);
 struct Dimensions dimensions_niveau(int niveau);
 
 int unite_chrono_restant(int prct_restant, int hauteur, int largeur);
+int nombre_oiseaux(struct ModeleNiveau modele);
 
 #endif //SNOOPY_NIVEAU_H

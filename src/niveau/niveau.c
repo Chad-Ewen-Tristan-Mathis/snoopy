@@ -8,8 +8,14 @@
 #include <unistd.h>
 
 #include "niveau.h"
+#include "../menu/menu.h"
 #include "../tools/tools.h"
 
+int niveau_existe(char *niveau) {
+    char path[100];
+    sprintf(path, "../assets/niveaux/%s.txt", niveau);
+    return access(path, F_OK) != -1;
+}
 
 int affiche_unite(int indice, int unites_rouges) {
     if(indice < unites_rouges) {
@@ -54,7 +60,17 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
     char path[100];
     if(sauvegarde) {
         sprintf(path, "../assets/sauvegardes/%s.txt", id);
-    } else sprintf(path, "../assets/niveaux/%s.txt", id);
+    } else {
+        sprintf(path, "../assets/niveaux/%s.txt", id);
+        if(!niveau_existe(id)) {
+            system("cls");
+            printf("Votre partie est terminee !");
+            sleep(3);
+            system("cls");
+            afficher_fichier("../assets/logo.txt");
+            menu();
+        }
+    }
 
     struct Coordonnees snoopy = {0, 0};
     struct Coordonnees *oiseaux = malloc(4 * sizeof(struct Coordonnees));
@@ -145,6 +161,7 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
             niveau,
             temps_restant,
             nb_vies,
+            nb_oiseaux,
             score,
             snoopy,
             oiseaux,
@@ -196,3 +213,11 @@ int unite_chrono_restant(int prct_restant, int hauteur, int largeur) {
     return (unites * prct_restant) / 100;
 }
 
+int nombre_oiseaux(struct ModeleNiveau modele) {
+    int nb_oiseaux = 0;
+    for(int i = 0; i < modele.nb_oiseaux; i++) {
+        if(modele.oiseaux[i].x != modele.largeur && modele.oiseaux[i].y != modele.hauteur) nb_oiseaux++;
+    }
+
+    return nb_oiseaux;
+}

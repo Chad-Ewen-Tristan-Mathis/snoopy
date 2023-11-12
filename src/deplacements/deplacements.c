@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <time.h>
+#include <unistd.h>
 
 #include "deplacements.h"
 #include "commandes.h"
@@ -10,6 +11,7 @@
 
 int pousse_bloc(struct ModeleNiveau *modele, int x, int y, int direction);
 void teleportation(struct ModeleNiveau *modele, int x, int y);
+void oiseau(struct ModeleNiveau *modele);
 void tapis_roulant(struct ModeleNiveau *modele, int x, int y, int direction);
 
 int getCaseValue(struct ModeleNiveau modele, int x, int y) {
@@ -47,6 +49,12 @@ void deplacer(struct ModeleNiveau *modele, int direction) {
         teleportation(modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y);
     } else if(nouvelle_case == 6) { // Tapis roulant
         tapis_roulant(modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y, direction);
+    } else if(nouvelle_case == 9) { // Oiseau
+        modele->modele[modele->snoopy.y][modele->snoopy.x] = 0;
+        modele->snoopy.y += add_y;
+        modele->snoopy.x += add_x;
+        modele->modele[modele->snoopy.y][modele->snoopy.x] = 8;
+        oiseau(modele);
     }
 }
 
@@ -88,6 +96,15 @@ void teleportation(struct ModeleNiveau *modele, int x, int y) {
                 modele->snoopy.x = tp_coord.x;
                 modele->snoopy.y = tp_coord.y;
             }
+        }
+    }
+}
+void oiseau(struct ModeleNiveau *modele) {
+    for(int i = 0; i < modele->nb_oiseaux; i++) {
+        struct Coordonnees oiseau = modele->oiseaux[i];
+        if(oiseau.x == modele->snoopy.x && oiseau.y == modele->snoopy.y) {
+            modele->oiseaux[i].x = modele->largeur;
+            modele->oiseaux[i].y = modele->hauteur;
         }
     }
 }
