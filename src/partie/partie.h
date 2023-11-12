@@ -6,5 +6,6 @@
 #define SNOOPY_PARTIE_H
 
 void nouvelle_partie();
+void afficher_vies(int vies);
 
 #endif //SNOOPY_PARTIE_H

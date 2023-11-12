@@ -64,7 +64,7 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
 
     int temps_restant = 0;
     int niveau = atoi(id);
-    int nb_vies = 0;
+    int nb_vies = 3;
     int score = 0;
 
     FILE *fichier = fopen(path, "r");

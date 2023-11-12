@@ -9,6 +9,7 @@
 #include "../chrono/chrono.h"
 #include "../menu/menu.h"
 #include "../deplacements/commandes.h"
+#include "../partie/partie.h"
 
 int sauvegarde_id_valide(char *id) {
     char chemin[100];
@@ -46,8 +47,8 @@ struct ModeleNiveau charger_sauvegarde(char *id, int code) {
                 if(menu_principal == 1) break;
                 if(pause != 0) continue;
                 system("cls");
-                afficher_fichier("../assets/logo.txt");
                 afficher_niveau(sauvegarde, temps_arrivee - (int) time(NULL));
+                afficher_vies(sauvegarde.vies_restantes);
                 usleep(250000); // (0.25s)
             }
             system("cls");
