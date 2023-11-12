@@ -17,12 +17,12 @@ int niveau_existe(char *niveau) {
 int affiche_unite(int indice, int unites_rouges) {
     if(indice < unites_rouges) {
         COULEUR(4, 0);
-        printf("#");
+        wprintf(L"■");
         COULEUR(3, 0);
         return 1;
     } else {
         COULEUR(2, 0);
-        printf("#");
+        wprintf(L"■");
         COULEUR(3, 0);
         return 0;
     }
@@ -61,7 +61,7 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
         sprintf(path, "../assets/niveaux/%s.txt", id);
         if(!niveau_existe(id)) {
             system("cls");
-            printf("Votre partie est terminee !");
+            wprintf(L"Votre partie est terminee !");
             sleep(3);
             system("cls");
             afficher_fichier("../assets/ASCII/logo.txt");
@@ -94,22 +94,22 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
         fgets(ligne, sizeof ligne, fichier);
         temps_restant = atoi(ligne);
 
-        printf("%d\n", temps_restant);
+        wprintf(L"%d\n", temps_restant);
 
         fgets(ligne, sizeof ligne, fichier);
         niveau = atoi(ligne);
 
-        printf("%d\n", niveau);
+        wprintf(L"%d\n", niveau);
 
         fgets(ligne, sizeof ligne, fichier);
         nb_vies = atoi(ligne);
 
-        printf("%d\n", nb_vies);
+        wprintf(L"%d\n", nb_vies);
 
         fgets(ligne, sizeof ligne, fichier);
         score = atoi(ligne);
 
-        printf("%d\n", score);
+        wprintf(L"%d\n", score);
 
     } else id = (char *)time(NULL);
 
@@ -178,7 +178,7 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant)
         int z = affiche_unite(indice_unite, unites_rouges);
         if(z) indice_unite++;
     }
-    printf("\n");
+    wprintf(L"\n");
 
 
 
@@ -190,19 +190,47 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant)
                 int z = affiche_unite(indice_unite, unites_rouges);
                 if(z) indice_unite++;
             } else {
-                char symboles[10] = {
-                        ' ', '~', '+', '~', '#', '@', '=', 'O', 'X', '^'
-                };
-                printf("%c", symboles[modele.modele[i][j]]);
+                switch(modele.modele[i][j]) {
+                    case 0:
+                        wprintf(L" ");
+                        break;
+                    case 1:
+                        wprintf(L"☐");
+                        break;
+                    case 2:
+                        wprintf(L"☑");
+                        break;
+                    case 3:
+                        wprintf(L"☒");
+                        break;
+                    case 4:
+                        wprintf(L"■");
+                        break;
+                    case 5:
+                        wprintf(L"⏏");
+                        break;
+                    case 6:
+                        wprintf(L"⏸");
+                        break;
+                    case 7:
+                        wprintf(L"⏺");
+                        break;
+                    case 8:
+                        wprintf(L"☺");
+                        break;
+                    case 9:
+                        wprintf(L"☄");
+                        break;
+                }
             }
         }
-        printf("\n");
+        wprintf(L"\n");
     }
     for(int k = 0; k<modele.largeur; k++) {
         int z = affiche_unite(indice_unite+modele.largeur-k, unites_rouges);
         if(z) indice_unite++;
     }
-    printf("\n");
+    wprintf(L"\n");
 }
 
 int unite_chrono_restant(int prct_restant, int hauteur, int largeur) {

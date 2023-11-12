@@ -15,10 +15,10 @@ void afficher_fichier(char *path)
 
     char c = fgetc(fichier);
     while( c != EOF ) {
-        printf("%c", c);
+        wprintf(L"%c", c);
         c = fgetc(fichier);
     }
-    printf("\n");
+    wprintf(L"\n");
     fclose(fichier);
 }
 

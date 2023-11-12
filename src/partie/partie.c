@@ -42,11 +42,11 @@ void jeu(struct ModeleNiveau modele) {
         modele.score += temps_restant*100;
         system("cls");
         afficher_fichier("../assets/ASCII/victoire.txt");
-        printf("\n\nScore du niveau %d : %d\n", modele.niveau, temps_restant*100);
-        printf("Temps restant : %d (%.2f%%)\n", temps_restant, temps_restant_prct);
-        printf("Nombre de vies restantes : %d\n", modele.vies_restantes);
-        printf("Score total : %d\n", modele.score);
-        printf("Appuyez sur une touche pour continuer...\n");
+        wprintf(L"\n\nScore du niveau %d : %d\n", modele.niveau, temps_restant*100);
+        wprintf(L"Temps restant : %d (%.2f%%)\n", temps_restant, temps_restant_prct);
+        wprintf(L"Nombre de vies restantes : %d\n", modele.vies_restantes);
+        wprintf(L"Score total : %d\n", modele.score);
+        wprintf(L"Appuyez sur une touche pour continuer...\n");
         sleep(1);
         while(!kbhit());
 
@@ -63,11 +63,11 @@ void jeu(struct ModeleNiveau modele) {
     } else if(temps_arrivee - (int) time(NULL) <= 0) {
         system("cls");
         afficher_fichier("../assets/ASCII/defaite.txt");
-        printf("\n\nNombre de vies restantes : %d\n", --modele.vies_restantes);
-        printf("Score total : %d\n", modele.score);
+        wprintf(L"\n\nNombre de vies restantes : %d\n", --modele.vies_restantes);
+        wprintf(L"Score total : %d\n", modele.score);
 
         if(modele.vies_restantes <= 0) {
-            printf("Appuyez sur une touche pour retourner au menu principal...\n");
+            wprintf(L"Appuyez sur une touche pour retourner au menu principal...\n");
             sleep(1);
             while(!kbhit());
             system("cls");
@@ -76,7 +76,7 @@ void jeu(struct ModeleNiveau modele) {
             return;
         }
 
-        printf("Appuyez sur une touche pour ressayer le niveau...\n");
+        wprintf(L"Appuyez sur une touche pour ressayer le niveau...\n");
         sleep(1);
         while(!kbhit());
 
@@ -108,12 +108,12 @@ void afficher_vies(int vies) {
             }
             if(ligne[strlen(ligne)-1] == '\n') ligne[strlen(ligne)-1] = '\0';
             for(int j=0; j< strlen(ligne); j++) ligne[j] = ligne[j] == 'x' ? ' ' : ligne[j];
-            printf("%s", ligne);
-            if(i == vies-1) printf("\n");
+            wprintf(L"%s", ligne);
+            if(i == vies-1) wprintf(L"\n");
         }
     }
 
-    printf("\n\n");
+    wprintf(L"\n\n");
 
     for(int i=0; i<vies; i++) fclose(fichiers[i]);
 }

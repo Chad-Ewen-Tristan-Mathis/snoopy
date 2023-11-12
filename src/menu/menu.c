@@ -23,7 +23,7 @@ void menu() {
             break;
         case 4:
             ;char id[10];
-            printf("Quel niveau voulez-vous charger ?\n");
+            wprintf(L"Quel niveau voulez-vous charger ?\n");
             scanf("%s", id);
             nouvelle_partie(id);
             break;

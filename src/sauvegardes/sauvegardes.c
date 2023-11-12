@@ -23,15 +23,15 @@ struct ModeleNiveau charger_sauvegarde(char *id, int code) {
     if(code == -1) {
         system("cls");
         afficher_fichier("../assets/ASCII/charger_partie.txt");
-        printf("Veuillez entrer l'id de la sauvegarde : \n");
+        wprintf(L"Veuillez entrer l'id de la sauvegarde : \n");
         scanf("%s", nouvel_id);
         return charger_sauvegarde(nouvel_id, 0);
     } else if(code == -2) {
-        printf("Sauvegarde invalide, Veuillez reessayer : \n");
+        wprintf(L"Sauvegarde invalide, Veuillez reessayer : \n");
         scanf("%s", nouvel_id);
         return charger_sauvegarde(nouvel_id, 0);
     } else {
-        printf("Chargement de la sauvegarde \"%s\"\n", id);
+        wprintf(L"Chargement de la sauvegarde \"%s\"\n", id);
         if(!sauvegarde_id_valide(id))
             return charger_sauvegarde(nouvel_id, -2);
         else {
@@ -60,14 +60,14 @@ void sauvegarder_partie(struct ModeleNiveau modele, int temps_restant, char* che
 
 char *demande_sauvegarde_id() {
     char *nom = malloc(50 * sizeof(char));
-    printf("Veuillez entrer le nom de la sauvegarde :");
+    wprintf(L"Veuillez entrer le nom de la sauvegarde :");
     scanf("%s", nom);
 
     char chemin[100];
     sprintf(chemin, "../assets/sauvegardes/%s.txt", nom);
 
     if(access(chemin, F_OK) != -1) {
-        printf("Une sauvegarde avec ce nom existe deja, voulez vous l'ecraser ? (o/n)\n");
+        wprintf(L"Une sauvegarde avec ce nom existe deja, voulez vous l'ecraser ? (o/n)\n");
         char reponse;
         scanf("%c", &reponse);
         if(reponse == 'n') return demande_sauvegarde_id();

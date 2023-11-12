@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <io.h>
 
 #include "src/menu/menu.h"
 #include "src/tools/tools.h"
@@ -9,8 +11,10 @@
 
 
 int main() {
+    _setmode(_fileno(stdout), _O_U16TEXT);
     COULEUR(3, 0);
-    afficher_fichier("../assets/logo.txt");
+
+    afficher_fichier("../assets/ASCII/logo.txt");
 
     menu();
 }

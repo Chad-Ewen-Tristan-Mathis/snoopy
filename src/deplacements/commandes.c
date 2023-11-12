@@ -17,7 +17,7 @@ void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause,
             case 'p':
                 if(*pause == 0) {
                     *pause = (int) time(NULL);
-                    printf("Pause\n");
+                    wprintf(L"Pause\n");
                 } else {
                     *temps_arrivee += (int) time(NULL) - *pause;
                     *pause = 0;
