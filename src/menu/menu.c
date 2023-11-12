@@ -6,6 +6,7 @@
 #include "../tools/tools.h"
 #include "../niveau/niveau.h"
 #include "../partie/partie.h"
+#include "../sauvegardes/sauvegardes.h"
 
 void menu() {
     afficher_menu();
@@ -18,7 +19,7 @@ void menu() {
             nouvelle_partie();
             break;
         case 3:
-            charger_partie();
+            charger_sauvegarde("", -1);
             break;
         case 4:
             charger_niveau();
@@ -26,9 +27,12 @@ void menu() {
         case 5:
             scores();
             break;
-        default:
+        case 6:
             quitter();
             break;
+        default:
+            system("cls");
+            menu();
     }
 };
 void afficher_menu() {
@@ -37,6 +41,7 @@ void afficher_menu() {
 int selectionne_option() {
     int option;
     scanf("%d", &option);
+
     return option;
 }
 
@@ -45,11 +50,11 @@ void afficher_regles() {
     afficher_fichier("../assets/regles.txt");
     menu();
 }
-void charger_partie() {}
+
 void charger_niveau() {}
 void scores() {}
 void quitter() {
     afficher_fichier("../assets/quitter.txt");
-    sleep(2000);
+    sleep(1);
     exit(0);
 }

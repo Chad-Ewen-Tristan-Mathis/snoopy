@@ -1,0 +1,5 @@
+temps restant
+niveau
+nb de vies
+score
+[[...], [...], [...], ...] // MODELE

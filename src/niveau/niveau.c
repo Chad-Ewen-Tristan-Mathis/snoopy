@@ -4,6 +4,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <malloc.h>
+#include <time.h>
+#include <unistd.h>
+
 #include "niveau.h"
 #include "../tools/tools.h"
 
@@ -22,47 +25,96 @@ int affiche_unite(int indice, int unites_rouges) {
     }
 }
 
-int *dimensions_niveau(char *path) {
+struct Dimensions dimensions_niveau(int niveau) {
+    char path[100];
+    sprintf(path, "../assets/niveaux/%d.txt", niveau);
+
     FILE *fichier = fopen(path, "r");
     if(fichier == NULL) {
         perror("Impossible d'ouvrir le fichier");
     }
 
     char ligne[100];
-    int *dimensions = malloc(2 * sizeof(int));
 
     fgets(ligne, sizeof ligne, fichier);
 
-    dimensions[0] = strlen(ligne)-1;
-    dimensions[1] = 1;
+    struct Dimensions dimensions;
+
+    dimensions.largeur = strlen(ligne)-1;
+    dimensions.hauteur = 1;
 
     while(fgets(ligne, sizeof ligne, fichier) != NULL) {
-        dimensions[1]++;
+        dimensions.hauteur++;
     }
 
     return dimensions;
 }
 
-struct ModeleNiveau modele_niveau(char *path) {
-    int *dimensions = dimensions_niveau(path);
-
-    int **modele = malloc(dimensions[1] * sizeof(int *));
+struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
+    char path[100];
+    if(sauvegarde) {
+        sprintf(path, "../assets/sauvegardes/%s.txt", id);
+    } else sprintf(path, "../assets/niveaux/%s.txt", id);
 
     struct Coordonnees snoopy = {0, 0};
     struct Coordonnees *oiseaux = malloc(4 * sizeof(struct Coordonnees));
+
     int nb_oiseaux = 0;
+    int nb_teleporteurs = 0;
+
+    int temps_restant = 0;
+    int niveau = atoi(id);
+    int nb_vies = 0;
+    int score = 0;
 
     FILE *fichier = fopen(path, "r");
-    if(fichier == NULL) {
+    if(fichier == NULL)
         perror("Impossible d'ouvrir le fichier");
-    }
-    for(int i = 0; i < dimensions[1]; i++) {
-        modele[i] = malloc(dimensions[0] * sizeof(int));
-        for(int j = 0; j < dimensions[0]; j++) {
+
+    if(sauvegarde) {
+        // TEMPS\n
+        // NIVEAU\n
+        // NB_VIES\n
+        // SCORE\n
+
+        char ligne[100];
+        fgets(ligne, sizeof ligne, fichier);
+        temps_restant = atoi(ligne);
+
+        printf("%d\n", temps_restant);
+
+        fgets(ligne, sizeof ligne, fichier);
+        niveau = atoi(ligne);
+
+        printf("%d\n", niveau);
+
+        fgets(ligne, sizeof ligne, fichier);
+        nb_vies = atoi(ligne);
+
+        printf("%d\n", nb_vies);
+
+        fgets(ligne, sizeof ligne, fichier);
+        score = atoi(ligne);
+
+        printf("%d\n", score);
+
+    } else id = (char *)time(NULL);
+
+    struct Dimensions dimensions = dimensions_niveau(niveau);
+
+    int **modele = malloc(dimensions.hauteur * sizeof(int *));
+
+    for(int i = 0; i < dimensions.hauteur; i++) {
+        modele[i] = malloc(dimensions.largeur * sizeof(int));
+        for(int j = 0; j < dimensions.largeur; j++) {
             char c = fgetc(fichier);
             switch (c) {
                 case '\n':
                     c = fgetc(fichier);
+                    break;
+                case '5':
+                    modele[i][j] = 5;
+                    nb_teleporteurs++;
                     break;
                 case '8':
                     snoopy.x = j;
@@ -78,7 +130,26 @@ struct ModeleNiveau modele_niveau(char *path) {
         }
     }
 
-    struct ModeleNiveau result = {modele, dimensions[0], dimensions[1], snoopy, oiseaux};
+    struct Coordonnees *teleporteurs = malloc(nb_teleporteurs * sizeof(struct Coordonnees));
+
+    nb_teleporteurs = 0;
+    for(int i = 1; i < dimensions.hauteur-1; i++)
+        for(int j = 1; j < dimensions.largeur-1; j++)
+            if(modele[i][j] == 5) teleporteurs[nb_teleporteurs++] = (struct Coordonnees) {j, i};
+
+    struct ModeleNiveau result = {
+            id,
+            modele,
+            dimensions.hauteur,
+            dimensions.largeur,
+            niveau,
+            temps_restant,
+            nb_vies,
+            score,
+            snoopy,
+            oiseaux,
+            teleporteurs
+    };
     return result;
 }
 

@@ -3,17 +3,27 @@
 #ifndef SNOOPY_NIVEAU_H
 #define SNOOPY_NIVEAU_H
 
-struct ModeleNiveau {
-    int **modele;
+struct Dimensions {
     int largeur;
     int hauteur;
+};
+struct ModeleNiveau {
+    char *id;
+    int **modele;
+    int hauteur;
+    int largeur;
+    int niveau;
+    int temps_restant;
+    int vies_restantes;
+    int score;
     struct Coordonnees snoopy;
     struct Coordonnees *oiseaux;
+    struct Coordonnees *teleporteurs;
 };
 
 void afficher_niveau(struct ModeleNiveau modele, int temps_restant);
-struct ModeleNiveau modele_niveau(char *path);
-int *dimensions_niveau(char *path);
+struct ModeleNiveau modele_niveau(char *id, int sauvegarde);
+struct Dimensions dimensions_niveau(int niveau);
 
 int unite_chrono_restant(int prct_restant, int hauteur, int largeur);
 

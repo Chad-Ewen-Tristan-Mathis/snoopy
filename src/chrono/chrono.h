@@ -6,6 +6,6 @@
 #define SNOOPY_CHRONO_H
 
 int nouveau_chrono();
-int temps_restant(int chrono);
+int ecoulement_temps(int *chrono);
 
 #endif //SNOOPY_CHRONO_H

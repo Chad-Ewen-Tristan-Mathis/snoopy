@@ -21,6 +21,7 @@ void afficher_fichier(char *path)
         printf("%c", c);
         c = fgetc(fichier);
     }
+    printf("\n");
     fclose(fichier);
 }
 
