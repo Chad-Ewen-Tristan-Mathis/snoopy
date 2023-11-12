@@ -13,11 +13,9 @@ void afficher_fichier(char *path)
         perror("Impossible d'ouvrir le fichier");
     }
 
-    char c = fgetc(fichier);
-    while( c != EOF ) {
-        wprintf(L"%c", c);
-        c = fgetc(fichier);
-    }
+    char ligne[100];
+    while(fgets(ligne, sizeof ligne, fichier) != NULL)
+        wprintf(L"%s", ligne);
     wprintf(L"\n");
     fclose(fichier);
 }

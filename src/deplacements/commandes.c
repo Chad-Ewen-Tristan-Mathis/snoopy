@@ -6,6 +6,7 @@
 
 #include "commandes.h"
 #include "../menu/menu.h"
+#include "../chrono/chrono.h"
 #include "deplacements.h"
 #include "../niveau/niveau.h"
 #include "../sauvegardes/sauvegardes.h"
@@ -31,6 +32,30 @@ void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause,
                 char *nom = demande_sauvegarde_id();
                 sauvegarder_partie(*modele, *temps_arrivee - pause_timestamp, nom);
                 break;
+            case 'q': // Abandonner
+                if(*pause != 0) break;
+                *menu_principal = 1;
+                break;
+            case 'r': // Recommencer
+                if(*pause != 0) break;
+                if(modele->vies_restantes <= 1) {
+                    system("cls");
+                    wprintf(L"Vous n'avez plus qu'une vies restantes ! Vous ne pouvez donc pas réessayer\n");
+                    sleep(1);
+                    break;
+                }
+                *derniere_direction = ' ';
+                int score = modele->score;
+                int vies = --modele->vies_restantes;
+                char niveau[10];
+                sprintf(niveau, "%d", modele->niveau);
+                *modele = modele_niveau(niveau, 0);
+                *temps_arrivee = nouveau_chrono();
+                modele->score = score;
+                modele->vies_restantes = vies;
+                system("cls");
+                afficher_fichier("../assets/ASCII/recommence.txt");
+                sleep(1);
             case 32: // Espace
                 if(*pause != 0) break;
                 casse_bloc(modele, derniere_direction);
