@@ -28,7 +28,7 @@ void jeu(struct ModeleNiveau modele) {
         if(menu_principal == 1) break;
         if(pause != 0) continue;
         system("cls");
-        afficher_niveau(modele, temps_arrivee - (int) time(NULL));
+        afficher_niveau(modele, temps_arrivee - (int) time(NULL), derniere_direction);
         afficher_vies(modele.vies_restantes);
         usleep(250000); // (0.25s)
     }

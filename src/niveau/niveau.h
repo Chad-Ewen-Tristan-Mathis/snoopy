@@ -22,7 +22,7 @@ struct ModeleNiveau {
     struct Coordonnees *teleporteurs;
 };
 
-void afficher_niveau(struct ModeleNiveau modele, int temps_restant);
+void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char derniere_direction);
 struct ModeleNiveau modele_niveau(char *id, int sauvegarde);
 struct Dimensions dimensions_niveau(int niveau);
 

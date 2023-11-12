@@ -167,7 +167,7 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
     return result;
 }
 
-void afficher_niveau(struct ModeleNiveau modele, int temps_restant)
+void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char derniere_direction)
 {
 //    Affichage niveau + chrono
     float temps_restant_prct = (float)(temps_restant * 100) / (float)120;
@@ -216,7 +216,23 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant)
                         wprintf(L"⏺");
                         break;
                     case 8:
-                        wprintf(L"☺");
+                        switch (derniere_direction) {
+                            case 'z':
+                                wprintf(L"▲");
+                                break;
+                            case 'q':
+                                wprintf(L"◀");
+                                break;
+                            case 's':
+                                wprintf(L"▼");
+                                break;
+                            case 'd':
+                                wprintf(L"▶");
+                                break;
+                            default:
+                                wprintf(L"X");
+                                break;
+                        }
                         break;
                     case 9:
                         wprintf(L"☄");
