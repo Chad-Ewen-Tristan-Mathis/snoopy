@@ -10,9 +10,9 @@
 #include "../chrono/chrono.h"
 #include "../deplacements/commandes.h"
 
-void nouvelle_partie() {
+void nouvelle_partie(char *id) {
     system("cls");
-    struct ModeleNiveau niveau = modele_niveau("1", 0);
+    struct ModeleNiveau niveau = modele_niveau(id, 0);
     int temps_arrivee = nouveau_chrono();
     int pause = 0;
     int menu_principal = 0;

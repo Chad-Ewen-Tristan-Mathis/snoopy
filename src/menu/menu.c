@@ -16,13 +16,16 @@ void menu() {
             afficher_regles();
             break;
         case 2:
-            nouvelle_partie();
+            nouvelle_partie("1");
             break;
         case 3:
             charger_sauvegarde("", -1);
             break;
         case 4:
-            charger_niveau();
+            ;char id[10];
+            printf("Quel niveau voulez-vous charger ?\n");
+            scanf("%s", id);
+            nouvelle_partie(id);
             break;
         case 5:
             scores();

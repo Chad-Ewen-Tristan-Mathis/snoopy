@@ -45,3 +45,7 @@
 81	168	7215026251245396	snoopy.exe	89373e2ecc12b163
 3	78	7215028885638238	CMakeFiles/snoopy.dir/src/partie/partie.c.obj	275d5eae23402265
 78	161	7215028886423914	snoopy.exe	89373e2ecc12b163
+3	116	7215185660852568	CMakeFiles/snoopy.dir/src/menu/menu.c.obj	c414b58c3afc5231
+8	116	7215185660852568	CMakeFiles/snoopy.dir/src/partie/partie.c.obj	275d5eae23402265
+12	123	7215185660940571	CMakeFiles/snoopy.dir/src/sauvegardes/sauvegardes.c.obj	77a43ea72cc0e7e6
+3	188	7215185737193432	snoopy.exe	89373e2ecc12b163
