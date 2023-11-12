@@ -16,96 +16,63 @@ int getCaseValue(struct ModeleNiveau modele, int x, int y) {
     return modele.modele[y][x];
 }
 
-void haut(struct ModeleNiveau *modele) {
-    int nouvelle_case = getCaseValue(*modele, modele->snoopy.x, modele->snoopy.y - 1);
-    if(nouvelle_case == 0 || nouvelle_case == 1 || nouvelle_case == 2 && pousse_bloc(modele, modele->snoopy.x, modele->snoopy.y-1, 'z')) {
-        modele->modele[modele->snoopy.y][modele->snoopy.x] = 0;
-        modele->modele[--modele->snoopy.y][modele->snoopy.x] = 8;
-    } else if(nouvelle_case == 3) { // Bloc piégé
-        // PIEGE
-    } else if(nouvelle_case == 4) { // Bloc invincible
-        // INVINCIBLE
-    } else if(nouvelle_case == 5) { // Bloc apparition/disparition
-        teleportation(modele, modele->snoopy.x, modele->snoopy.y-1);
-    } else if(nouvelle_case == 6) { // Tapis roulant
-        tapis_roulant(modele, modele->snoopy.x, modele->snoopy.y, 'z');
+void deplacer(struct ModeleNiveau *modele, int direction) {
+    int add_x = 0;
+    int add_y = 0;
+    switch (direction) {
+        case 'z':
+            add_y = -1;
+            break;
+        case 'q':
+            add_x = -1;
+            break;
+        case 's':
+            add_y = 1;
+            break;
+        case 'd':
+            add_x = 1;
+            break;
     }
-}
-void bas(struct ModeleNiveau *modele) {
-    int nouvelle_case = getCaseValue(*modele, modele->snoopy.x, modele->snoopy.y + 1);
-    if(nouvelle_case == 0 || nouvelle_case == 1 || nouvelle_case == 2 && pousse_bloc(modele, modele->snoopy.x, modele->snoopy.y+1, 's')) {
+    int nouvelle_case = getCaseValue(*modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y);
+    if(nouvelle_case == 0 || nouvelle_case == 1 || nouvelle_case == 2 && pousse_bloc(modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y, direction)) {
         modele->modele[modele->snoopy.y][modele->snoopy.x] = 0;
-        modele->modele[++modele->snoopy.y][modele->snoopy.x] = 8;
+        modele->snoopy.y += add_y;
+        modele->snoopy.x += add_x;
+        modele->modele[modele->snoopy.y][modele->snoopy.x] = 8;
     } else if(nouvelle_case == 3) { // Bloc piégé
         // PIEGE
     } else if(nouvelle_case == 4) { // Bloc invincible
         // INVINCIBLE
     } else if(nouvelle_case == 5) { // Bloc apparition/disparition
-        teleportation(modele, modele->snoopy.x, modele->snoopy.y+1);
+        teleportation(modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y);
     } else if(nouvelle_case == 6) { // Tapis roulant
-        tapis_roulant(modele, modele->snoopy.x, modele->snoopy.y, 's');
-    }
-}
-void gauche(struct ModeleNiveau *modele) {
-    int nouvelle_case = getCaseValue(*modele, modele->snoopy.x-1, modele->snoopy.y);
-    if(nouvelle_case == 0 || nouvelle_case == 1 || nouvelle_case == 2 && pousse_bloc(modele, modele->snoopy.x-1, modele->snoopy.y, 'q')) {
-        modele->modele[modele->snoopy.y][modele->snoopy.x] = 0;
-        modele->modele[modele->snoopy.y][--modele->snoopy.x] = 8;
-    } else if(nouvelle_case == 3) { // Bloc piégé
-        // PIEGE
-    } else if(nouvelle_case == 4) { // Bloc invincible
-        // INVINCIBLE
-    } else if(nouvelle_case == 5) { // Bloc apparition/disparition
-        teleportation(modele, modele->snoopy.x-1, modele->snoopy.y);
-    } else if(nouvelle_case == 6) { // Tapis roulant
-        tapis_roulant(modele, modele->snoopy.x, modele->snoopy.y, 'q');
-    }
-}
-void droite(struct ModeleNiveau *modele) {
-    int nouvelle_case = getCaseValue(*modele, modele->snoopy.x+1, modele->snoopy.y);
-    if(nouvelle_case == 0 || nouvelle_case == 1 || nouvelle_case == 2 && pousse_bloc(modele, modele->snoopy.x+1, modele->snoopy.y, 'd')) {
-        modele->modele[modele->snoopy.y][modele->snoopy.x] = 0;
-        modele->modele[modele->snoopy.y][++modele->snoopy.x] = 8;
-    } else if(nouvelle_case == 3) { // Bloc piégé
-        // PIEGE
-    } else if(nouvelle_case == 4) { // Bloc invincible
-        // INVINCIBLE
-    } else if(nouvelle_case == 5) { // Bloc apparition/disparition
-        teleportation(modele, modele->snoopy.x+1, modele->snoopy.y);
-    } else if(nouvelle_case == 6) { // Tapis roulant
-        tapis_roulant(modele, modele->snoopy.x, modele->snoopy.y, 'd');
+        tapis_roulant(modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y, direction);
     }
 }
 
 int pousse_bloc(struct ModeleNiveau *modele, int x, int y, int direction) {
-    if(direction == 'z') {
-        int nouvelle_case = getCaseValue(*modele, x, y - 1);
-        if(nouvelle_case == 0 || nouvelle_case == 1 || (nouvelle_case == 2 && pousse_bloc(modele, x, y - 1, direction))) { // Case vide
-            modele->modele[y-1][x] = 2;
-            modele->modele[y][x] = 0;
-            return 1;
-        }
-    } else if(direction == 'q') {
-        int nouvelle_case = getCaseValue(*modele, x - 1, y);
-        if(nouvelle_case == 0 || nouvelle_case == 1 || (nouvelle_case == 2 && pousse_bloc(modele, x - 1, y, direction))) { // Case vide
-            modele->modele[y][x-1] = 2;
-            modele->modele[y][x] = 0;
-            return 1;
-        }
-    } else if(direction == 's') {
-        int nouvelle_case = getCaseValue(*modele, x, y + 1);
-        if(nouvelle_case == 0 || nouvelle_case == 1 || (nouvelle_case == 2 && pousse_bloc(modele, x, y + 1, direction))) { // Case vide
-            modele->modele[y+1][x] = 2;
-            modele->modele[y][x] = 0;
-            return 1;
-        }
-    } else if(direction == 'd') {
-        int nouvelle_case = getCaseValue(*modele, x + 1, y);
-        if(nouvelle_case == 0 || nouvelle_case == 1 || (nouvelle_case == 2 && pousse_bloc(modele, x + 1, y, direction))) { // Case vide
-            modele->modele[y][x+1] = 2;
-            modele->modele[y][x] = 0;
-            return 1;
-        }
+    int add_x = 0;
+    int add_y = 0;
+    switch (direction) {
+        case 'z':
+            add_y = -1;
+            break;
+        case 'q':
+            add_x = -1;
+            break;
+        case 's':
+            add_y = 1;
+            break;
+        case 'd':
+            add_x = 1;
+            break;
+    }
+
+    int nouvelle_case = getCaseValue(*modele, x+add_x, y+add_y);
+    if(nouvelle_case == 0 || nouvelle_case == 1 || (nouvelle_case == 2 && pousse_bloc(modele, x+add_x, y+add_y, direction))) {
+        modele->modele[y+add_y][x+add_x] = 4;
+        modele->modele[y][x] = 0;
+        return 1;
     }
 
     return 0;

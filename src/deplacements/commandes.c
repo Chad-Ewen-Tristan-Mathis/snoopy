@@ -29,17 +29,17 @@ void handleKeypress(struct ModeleNiveau *modele, int *chrono, int *pause, int *m
             case 224:
                 if(*pause != 0) break;
                 switch (getch()) {
-                    case 72:
-                        haut(modele);
+                    case 72: // Haut
+                        deplacer(modele, 'z');
                         break;
-                    case 80:
-                        bas(modele);
+                    case 80: // Bas
+                        deplacer(modele, 's');
                         break;
-                    case 75:
-                        gauche(modele);
+                    case 75: // Gauche
+                        deplacer(modele, 'q');
                         break;
-                    case 77:
-                        droite(modele);
+                    case 77: // Droite
+                        deplacer(modele, 'd');
                         break;
                 }
                 break;
