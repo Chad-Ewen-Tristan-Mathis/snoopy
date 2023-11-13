@@ -32,7 +32,6 @@ void jeu(struct ModeleNiveau modele) {
         afficher_niveau(modele, temps_arrivee - (int) time(NULL), derniere_direction);
         deplacer_balle(&modele);
         afficher_vies(modele.vies_restantes);
-        wprintf(L"%d %d, %d", modele.balle.x, modele.balle.y, modele.balle.direction);
         if(modele.balle.x == modele.snoopy.x && modele.balle.y == modele.snoopy.y) modele.vies_restantes--;
         usleep(250000); // (0.25s)
     }

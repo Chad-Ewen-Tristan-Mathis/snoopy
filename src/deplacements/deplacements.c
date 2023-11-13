@@ -157,18 +157,15 @@ int pousse_bloc(struct ModeleNiveau *modele, int x, int y, int direction) {
     return 0;
 }
 void teleportation(struct ModeleNiveau *modele, int x, int y) {
-    for(int i = 1; i < modele->hauteur-1; i++) {
-        for(int j = 1; j < modele->largeur-1; j++) {
-            if(modele->modele[i][j] == 7) {
-                srand(time(NULL));
-                struct Coordonnees tp_coord = modele->teleporteurs[rand() % (sizeof modele->teleporteurs / sizeof(struct Coordonnees))];
-                modele->modele[y][x] = 0;
-                modele->modele[tp_coord.y][tp_coord.x] = 8;
-                modele->snoopy.x = tp_coord.x;
-                modele->snoopy.y = tp_coord.y;
-            }
-        }
-    }
+    if(modele->nb_teleporteurs == 0) return;
+    srand(time(NULL));
+    struct Coordonnees tp_coord;
+    do {
+        tp_coord = modele->teleporteurs[rand() % modele->nb_teleporteurs];
+    } while (tp_coord.x == x && tp_coord.y == y);
+    modele->snoopy.x = tp_coord.x;
+    modele->snoopy.y = tp_coord.y;
+    modele->modele[modele->snoopy.y][modele->snoopy.x] = 8;
 }
 void oiseau(struct ModeleNiveau *modele) {
     for(int i = 0; i < modele->nb_oiseaux; i++) {

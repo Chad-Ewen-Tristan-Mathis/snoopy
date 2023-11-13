@@ -21,6 +21,7 @@ struct ModeleNiveau {
     int temps_restant;
     int vies_restantes;
     int nb_oiseaux;
+    int nb_teleporteurs;
     int score;
     int sous_case;
     struct Coordonnees snoopy;

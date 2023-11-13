@@ -163,6 +163,7 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
             temps_restant,
             nb_vies,
             nb_oiseaux,
+            nb_teleporteurs,
             score,
             sous_case,
             snoopy,
