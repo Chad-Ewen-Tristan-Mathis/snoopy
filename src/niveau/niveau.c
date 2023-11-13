@@ -70,6 +70,7 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
     }
 
     struct Coordonnees snoopy = {0, 0};
+    struct Balle balle = {1, 1, 0}; // 0 = Sud Est, 1 = Sud Ouest, 2 = Nord Ouest, 3 = Nord Est
     struct Coordonnees *oiseaux = malloc(4 * sizeof(struct Coordonnees));
 
     int nb_oiseaux = 0;
@@ -79,6 +80,7 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
     int niveau = atoi(id);
     int nb_vies = 3;
     int score = 0;
+    int sous_case = 0;
 
     FILE *fichier = fopen(path, "r");
     if(fichier == NULL)
@@ -94,22 +96,24 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
         fgets(ligne, sizeof ligne, fichier);
         temps_restant = atoi(ligne);
 
-        wprintf(L"%d\n", temps_restant);
-
         fgets(ligne, sizeof ligne, fichier);
         niveau = atoi(ligne);
-
-        wprintf(L"%d\n", niveau);
 
         fgets(ligne, sizeof ligne, fichier);
         nb_vies = atoi(ligne);
 
-        wprintf(L"%d\n", nb_vies);
-
         fgets(ligne, sizeof ligne, fichier);
         score = atoi(ligne);
 
-        wprintf(L"%d\n", score);
+        fgets(ligne, sizeof ligne, fichier);
+        sous_case = atoi(ligne);
+
+        fgets(ligne, sizeof ligne, fichier);
+        balle.x = atoi(ligne);
+        fgets(ligne, sizeof ligne, fichier);
+        balle.y = atoi(ligne);
+        fgets(ligne, sizeof ligne, fichier);
+        balle.direction = atoi(ligne);
 
     } else id = (char *)time(NULL);
 
@@ -160,7 +164,9 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
             nb_vies,
             nb_oiseaux,
             score,
+            sous_case,
             snoopy,
+            balle,
             oiseaux,
             teleporteurs
     };
@@ -190,7 +196,11 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char dernier
                 int z = affiche_unite(indice_unite, unites_rouges);
                 if(z) indice_unite++;
             } else {
-                switch(modele.modele[i][j]) {
+                if(modele.balle.y == i && modele.balle.x == j) {
+                    COULEUR(15, 0);
+                    wprintf(L"●");
+                    COULEUR(3, 0);
+                } else switch(modele.modele[i][j]) {
                     case 0:
                         wprintf(L" ");
                         break;
@@ -211,11 +221,6 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char dernier
                         break;
                     case 6:
                         wprintf(L"☰");
-                        break;
-                    case 7:
-                        COULEUR(15, 0);
-                        wprintf(L"⏺");
-                        COULEUR(3, 0);
                         break;
                     case 8:
                         COULEUR(14, 0);

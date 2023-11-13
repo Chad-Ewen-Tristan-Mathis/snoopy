@@ -3,7 +3,7 @@
 #ifndef SNOOPY_DEPLACEMENTS_H
 #define SNOOPY_DEPLACEMENTS_H
 
-void deplacer(struct ModeleNiveau *modele, char direction, char *derniere_direction, int *ancienne_case);
+void deplacer(struct ModeleNiveau *modele, char direction, char *derniere_direction);
 void casse_bloc(struct ModeleNiveau *modele, const char *direction);
-
+void deplacer_balle(struct ModeleNiveau *modele);
 #endif //SNOOPY_DEPLACEMENTS_H

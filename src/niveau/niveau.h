@@ -7,6 +7,11 @@ struct Dimensions {
     int largeur;
     int hauteur;
 };
+struct Balle {
+    int x;
+    int y;
+    int direction;
+};
 struct ModeleNiveau {
     char *id;
     int **modele;
@@ -17,7 +22,9 @@ struct ModeleNiveau {
     int vies_restantes;
     int nb_oiseaux;
     int score;
+    int sous_case;
     struct Coordonnees snoopy;
+    struct Balle balle;
     struct Coordonnees *oiseaux;
     struct Coordonnees *teleporteurs;
 };

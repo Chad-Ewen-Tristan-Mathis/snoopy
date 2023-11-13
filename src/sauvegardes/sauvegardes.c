@@ -47,7 +47,11 @@ void sauvegarder_partie(struct ModeleNiveau modele, int temps_restant, char* che
     fprintf(fichier, "%d\n", temps_restant);
     fprintf(fichier, "%d\n", modele.niveau);
     fprintf(fichier, "%d\n", modele.vies_restantes);
-    fprintf(fichier, "%d", modele.score);
+    fprintf(fichier, "%d\n", modele.score);
+    fprintf(fichier, "%d\n", modele.sous_case);
+    fprintf(fichier, "%d\n", modele.balle.x);
+    fprintf(fichier, "%d\n", modele.balle.y);
+    fprintf(fichier, "%d", modele.balle.direction);
 //    Ajout de la matrice
     for (int i = 0; i < modele.hauteur; i++) {
         fprintf(fichier, "\n");

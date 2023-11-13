@@ -10,6 +10,7 @@
 #include "../tools/tools.h"
 #include "../chrono/chrono.h"
 #include "../deplacements/commandes.h"
+#include "../deplacements/deplacements.h"
 #include "../sauvegardes/sauvegardes.h"
 
 void nouvelle_partie(char *id) {
@@ -22,15 +23,17 @@ void jeu(struct ModeleNiveau modele) {
     int pause = 0;
     int menu_principal = 0;
 
-    int ancienne_case = 0;
     char derniere_direction = ' ';
-    while((temps_arrivee - (int) time(NULL) > 0 || pause != 0) && nombre_oiseaux(modele) > 0) {
-        handleKeypress(&modele, &temps_arrivee, &pause, &menu_principal, &derniere_direction, &ancienne_case);
+    while((temps_arrivee - (int) time(NULL) > 0 || pause != 0) && nombre_oiseaux(modele) && modele.vies_restantes) {
+        handleKeypress(&modele, &temps_arrivee, &pause, &menu_principal, &derniere_direction);
         if(menu_principal == 1) break;
         if(pause != 0) continue;
         system("cls");
         afficher_niveau(modele, temps_arrivee - (int) time(NULL), derniere_direction);
+        deplacer_balle(&modele);
         afficher_vies(modele.vies_restantes);
+        wprintf(L"%d %d, %d", modele.balle.x, modele.balle.y, modele.balle.direction);
+        if(modele.balle.x == modele.snoopy.x && modele.balle.y == modele.snoopy.y) modele.vies_restantes--;
         usleep(250000); // (0.25s)
     }
     if(menu_principal == 1) {
@@ -62,10 +65,13 @@ void jeu(struct ModeleNiveau modele) {
 
         sauvegarder_partie(modele, 120, "../assets/sauvegardes/sauvegarde_temporaire.txt");
         charger_sauvegarde("sauvegarde_temporaire", 0);
-    } else if(temps_arrivee - (int) time(NULL) <= 0) {
+    } else if(temps_arrivee - (int) time(NULL) <= 0 || !modele.vies_restantes) {
         system("cls");
         afficher_fichier("../assets/ASCII/defaite.txt");
-        wprintf(L"\n\nNombre de vies restantes : %d\n", --modele.vies_restantes);
+        if(modele.vies_restantes) modele.vies_restantes--;
+        if(modele.vies_restantes) wprintf(L"Vous avez été pris par le temps !");
+        else wprintf(L"Vous avez été touché par la balle !");
+        wprintf(L"\n\nNombre de vies restantes : %d\n", modele.vies_restantes);
         wprintf(L"Score total : %d\n", modele.score);
 
         if(modele.vies_restantes <= 0) {
