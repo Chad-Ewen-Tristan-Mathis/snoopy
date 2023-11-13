@@ -1,3 +1,0 @@
-"C:\Users\chadh\AppData\Local\JetBrains\CLion 2023.2.1\bin\cmake\win\x64\bin\cmake.exe" -E rm -f CMakeFiles\snoopy.dir/objects.a
-C:\Users\chadh\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\ar.exe qc CMakeFiles\snoopy.dir/objects.a @CMakeFiles\snoopy.dir\objects1.rsp
-C:\Users\chadh\AppData\Local\JETBRA~1\CLION2~1.1\bin\mingw\bin\gcc.exe -g -Wl,--whole-archive CMakeFiles\snoopy.dir/objects.a -Wl,--no-whole-archive -o snoopy.exe -Wl,--out-implib,libsnoopy.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\snoopy.dir\linkLibs.rsp

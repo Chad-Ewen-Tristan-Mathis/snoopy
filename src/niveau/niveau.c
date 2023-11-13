@@ -17,12 +17,12 @@ int niveau_existe(char *niveau) {
 int affiche_unite(int indice, int unites_rouges) {
     if(indice < unites_rouges) {
         COULEUR(4, 0);
-        wprintf(L"■");
+        wprintf(L"█");
         COULEUR(3, 0);
         return 1;
     } else {
         COULEUR(2, 0);
-        wprintf(L"■");
+        wprintf(L"█");
         COULEUR(3, 0);
         return 0;
     }
@@ -195,16 +195,16 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char dernier
                         wprintf(L" ");
                         break;
                     case 1:
-                        wprintf(L"☐");
+                        wprintf(L"▨");
                         break;
                     case 2:
-                        wprintf(L"☑");
+                        wprintf(L"▢");
                         break;
                     case 3:
                         wprintf(L"☒");
                         break;
                     case 4:
-                        wprintf(L"■");
+                        wprintf(L"█");
                         break;
                     case 5:
                         wprintf(L"⏏");
