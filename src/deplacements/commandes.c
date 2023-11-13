@@ -30,7 +30,9 @@ void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause,
                 system("cls");
 
                 char *nom = demande_sauvegarde_id();
-                sauvegarder_partie(*modele, *temps_arrivee - pause_timestamp, nom);
+                char chemin[200];
+                sprintf(chemin, "../assets/sauvegardes/%s.txt", nom);
+                sauvegarder_partie(*modele, *temps_arrivee - pause_timestamp, chemin);
                 break;
             case 'q': // Abandonner
                 if(*pause != 0) break;

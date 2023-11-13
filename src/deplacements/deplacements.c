@@ -98,7 +98,7 @@ int pousse_bloc(struct ModeleNiveau *modele, int x, int y, int direction) {
     }
 
     int nouvelle_case = getCaseValue(*modele, x+add_x, y+add_y);
-    if(nouvelle_case == 0 || nouvelle_case == 1 || (nouvelle_case == 2 && pousse_bloc(modele, x+add_x, y+add_y, direction))) {
+    if(nouvelle_case == 0 || (nouvelle_case == 2 && pousse_bloc(modele, x+add_x, y+add_y, direction))) {
         modele->modele[y+add_y][x+add_x] = 4;
         modele->modele[y][x] = 0;
         return 1;

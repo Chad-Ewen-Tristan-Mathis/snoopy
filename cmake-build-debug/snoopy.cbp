@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="snoopy"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="snoopy">
+				<Option output="C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/snoopy.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/chadh/AppData/Local/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include"/>
+					<Add directory="C:/Users/chadh/AppData/Local/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../include"/>
+					<Add directory="C:/Users/chadh/AppData/Local/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed"/>
+					<Add directory="C:/Users/chadh/AppData/Local/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 snoopy"/>
+					<CompileFile command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="snoopy/fast">
+				<Option output="C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/snoopy.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/Users/chadh/AppData/Local/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include"/>
+					<Add directory="C:/Users/chadh/AppData/Local/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../include"/>
+					<Add directory="C:/Users/chadh/AppData/Local/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/include-fixed"/>
+					<Add directory="C:/Users/chadh/AppData/Local/JetBrains/CLion 2023.2.1/bin/mingw/bin/../lib/gcc/x86_64-w64-mingw32/13.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 snoopy/fast"/>
+					<CompileFile command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/Users/chadh/AppData/Local/JETBRA~1/CLION2~1.1/bin/mingw/bin/mingw32-make.exe -f &quot;C:/Users/chadh/Downloads/snoopy/snoopy/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/main.c">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/chrono/chrono.c">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/chrono/chrono.h">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/deplacements/commandes.c">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/deplacements/commandes.h">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/deplacements/deplacements.c">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/deplacements/deplacements.h">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/menu/menu.c">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/menu/menu.h">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/niveau/niveau.c">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/niveau/niveau.h">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/partie/partie.c">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/partie/partie.h">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/sauvegardes/sauvegardes.c">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/sauvegardes/sauvegardes.h">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/tools/tools.c">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/src/tools/tools.h">
+			<Option target="snoopy"/>
+		</Unit>
+		<Unit filename="C:/Users/chadh/Downloads/snoopy/snoopy/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

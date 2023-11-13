@@ -216,6 +216,7 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char dernier
                         wprintf(L"⏺");
                         break;
                     case 8:
+                        COULEUR(14, 0);
                         switch (derniere_direction) {
                             case 'z':
                                 wprintf(L"▲");
@@ -233,6 +234,7 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char dernier
                                 wprintf(L"X");
                                 break;
                         }
+                        COULEUR(3, 0);
                         break;
                     case 9:
                         wprintf(L"☄");
