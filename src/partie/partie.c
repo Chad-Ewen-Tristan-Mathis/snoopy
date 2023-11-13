@@ -22,9 +22,10 @@ void jeu(struct ModeleNiveau modele) {
     int pause = 0;
     int menu_principal = 0;
 
+    int ancienne_case = 0;
     char derniere_direction = ' ';
     while((temps_arrivee - (int) time(NULL) > 0 || pause != 0) && nombre_oiseaux(modele) > 0) {
-        handleKeypress(&modele, &temps_arrivee, &pause, &menu_principal, &derniere_direction);
+        handleKeypress(&modele, &temps_arrivee, &pause, &menu_principal, &derniere_direction, &ancienne_case);
         if(menu_principal == 1) break;
         if(pause != 0) continue;
         system("cls");

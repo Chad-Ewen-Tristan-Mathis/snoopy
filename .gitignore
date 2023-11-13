@@ -50,5 +50,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
-assets/niveaux/{1,2,3,4}.txt
 cmake-build-debug/

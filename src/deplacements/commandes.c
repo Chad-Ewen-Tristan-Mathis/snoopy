@@ -12,7 +12,7 @@
 #include "../sauvegardes/sauvegardes.h"
 #include "../tools/tools.h"
 
-void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause, int *menu_principal, char *derniere_direction) {
+void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause, int *menu_principal, char *derniere_direction, int *ancienne_case) {
     if(kbhit()) {
         switch(getch()) {
             case 'p':
@@ -66,16 +66,16 @@ void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause,
                 if(*pause != 0) break;
                 switch (getch()) {
                     case 72: // Haut
-                        deplacer(modele, 'z', derniere_direction);
+                        deplacer(modele, 'z', derniere_direction, ancienne_case);
                         break;
                     case 80: // Bas
-                        deplacer(modele, 's', derniere_direction);
+                        deplacer(modele, 's', derniere_direction, ancienne_case);
                         break;
                     case 75: // Gauche
-                        deplacer(modele, 'q', derniere_direction);
+                        deplacer(modele, 'q', derniere_direction, ancienne_case);
                         break;
                     case 77: // Droite
-                        deplacer(modele, 'd', derniere_direction);
+                        deplacer(modele, 'd', derniere_direction, ancienne_case);
                         break;
                 }
                 break;
