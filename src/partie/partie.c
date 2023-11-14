@@ -24,22 +24,31 @@ void jeu(struct ModeleNiveau modele) {
     int menu_principal = 0;
 
     char derniere_direction = ' ';
-    while((temps_arrivee - (int) time(NULL) > 0 || pause != 0) && nombre_oiseaux(modele) && modele.vies_restantes) {
+    while((temps_arrivee - (int) time(NULL) > 0 || pause != 0) && nombre_oiseaux(modele) && modele.vies_restantes && !menu_principal) {
         handleKeypress(&modele, &temps_arrivee, &pause, &menu_principal, &derniere_direction);
-        if(menu_principal == 1) break;
         if(pause != 0) continue;
         system("cls");
         afficher_niveau(modele, temps_arrivee - (int) time(NULL), derniere_direction);
         deplacer_balle(&modele);
+        if(strlen(modele.message)) {
+            wprintf(L"Message: \n");
+            COULEUR(12, 0);
+            wprintf(L"%s\n", modele.message);
+            COULEUR(3, 0);
+        }
         afficher_vies(modele.vies_restantes);
-        if(modele.balle.x == modele.snoopy.x && modele.balle.y == modele.snoopy.y) modele.vies_restantes--;
+        if(modele.balle.x == modele.snoopy.x && modele.balle.y == modele.snoopy.y && modele.vies_restantes) {
+            modele.vies_restantes--;
+            modele.message = "La balle vous a touche, vous avez perdu une vie !";
+        }
         usleep(250000); // (0.25s)
     }
+    wprintf(L"OUT");
     if(menu_principal == 1) {
         system("cls");
         afficher_fichier("../assets/ASCII/logo.txt");
         menu();
-    } else if(nombre_oiseaux(modele) <= 0) {
+    } else if(!nombre_oiseaux(modele)) {
         int temps_restant = temps_arrivee - (int) time(NULL);
         float temps_restant_prct = (float)(temps_restant * 100) / (float)120;
         modele.score += temps_restant*100;
@@ -64,16 +73,16 @@ void jeu(struct ModeleNiveau modele) {
 
         sauvegarder_partie(modele, 120, "../assets/sauvegardes/sauvegarde_temporaire.txt");
         charger_sauvegarde("sauvegarde_temporaire", 0);
-    } else if(temps_arrivee - (int) time(NULL) <= 0 || !modele.vies_restantes) {
+    } else if((temps_arrivee - (int) time(NULL) <= 0) || !modele.vies_restantes) {
         system("cls");
         afficher_fichier("../assets/ASCII/defaite.txt");
         if(modele.vies_restantes) modele.vies_restantes--;
         if(modele.vies_restantes) wprintf(L"Vous avez été pris par le temps !");
-        else wprintf(L"Vous avez été touché par la balle !");
+        else wprintf(L"Vous n'avez plus de vies restantes !");
         wprintf(L"\n\nNombre de vies restantes : %d\n", modele.vies_restantes);
         wprintf(L"Score total : %d\n", modele.score);
 
-        if(modele.vies_restantes <= 0) {
+        if(!modele.vies_restantes) {
             wprintf(L"Appuyez sur une touche pour retourner au menu principal...\n");
             sleep(1);
             while(!kbhit());
@@ -101,6 +110,7 @@ void jeu(struct ModeleNiveau modele) {
 }
 
 void afficher_vies(int vies) {
+    if(vies == 0) return;
 //    tableau de 3 fichiers
     FILE *fichiers[3];
     for(int i=0; i<vies; i++) fichiers[i] = fopen("../assets/ASCII/coeur.txt", "r");

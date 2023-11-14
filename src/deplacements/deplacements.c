@@ -45,10 +45,6 @@ void deplacer(struct ModeleNiveau *modele, char direction, char *derniere_direct
         modele->snoopy.x += add_x;
         modele->sous_case = modele->modele[modele->snoopy.y][modele->snoopy.x];
         modele->modele[modele->snoopy.y][modele->snoopy.x] = 8;
-    } else if(nouvelle_case == 3) { // Bloc piégé
-        // PIEGE
-    } else if(nouvelle_case == 4) { // Bloc invincible
-        // INVINCIBLE
     } else if(nouvelle_case == 5) { // Bloc apparition/disparition
         modele->modele[modele->snoopy.y][modele->snoopy.x] = modele->sous_case;
         modele->sous_case = 5;
@@ -66,7 +62,10 @@ void deplacer(struct ModeleNiveau *modele, char direction, char *derniere_direct
         modele->sous_case = 0;
         oiseau(modele);
     }
-    if((modele->snoopy.x != ancien_snoopy.x || modele->snoopy.y != ancien_snoopy.y) && modele->balle.x == modele->snoopy.x && modele->balle.y == modele->snoopy.y) modele->vies_restantes--;
+    if((modele->snoopy.x != ancien_snoopy.x || modele->snoopy.y != ancien_snoopy.y) && modele->balle.x == modele->snoopy.x && modele->balle.y == modele->snoopy.y) {
+        modele->vies_restantes--;
+        modele->message = "La balle vous a touche, vous avez perdu une vie !";
+    }
 }
 void deplacer_balle(struct ModeleNiveau *modele) {
     int add_x = 0;
@@ -127,7 +126,11 @@ void casse_bloc(struct ModeleNiveau *modele, const char *direction) {
             break;
     }
     int nouvelle_case = getCaseValue(*modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y);
-    if(nouvelle_case == 1) modele->modele[modele->snoopy.y+add_y][modele->snoopy.x+add_x] = 0;
+    if(nouvelle_case == 1 || nouvelle_case == 3) modele->modele[modele->snoopy.y+add_y][modele->snoopy.x+add_x] = 0;
+    if(nouvelle_case == 3) {
+        modele->vies_restantes--;
+        modele->message = "Vous avez casse un bloc piege... Vous venez de perdre une vie !";
+    }
 }
 int pousse_bloc(struct ModeleNiveau *modele, int x, int y, int direction) {
     int add_x = 0;

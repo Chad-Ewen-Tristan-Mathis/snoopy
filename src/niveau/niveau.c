@@ -154,6 +154,8 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
         for(int j = 1; j < dimensions.largeur-1; j++)
             if(modele[i][j] == 5) teleporteurs[nb_teleporteurs++] = (struct Coordonnees) {j, i};
 
+    char message[500];
+
     struct ModeleNiveau result = {
             id,
             modele,
@@ -164,6 +166,7 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) {
             nb_vies,
             nb_oiseaux,
             nb_teleporteurs,
+            message,
             score,
             sous_case,
             snoopy,
@@ -212,7 +215,7 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char dernier
                         wprintf(L"▢");
                         break;
                     case 3:
-                        wprintf(L"☒");
+                        wprintf(L"▨");
                         break;
                     case 4:
                         wprintf(L"█");

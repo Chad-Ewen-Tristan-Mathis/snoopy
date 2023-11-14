@@ -22,6 +22,7 @@ struct ModeleNiveau {
     int vies_restantes;
     int nb_oiseaux;
     int nb_teleporteurs;
+    char *message;
     int score;
     int sous_case;
     struct Coordonnees snoopy;
