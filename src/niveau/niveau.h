@@ -22,13 +22,14 @@ struct ModeleNiveau {
     int vies_restantes;
     int nb_oiseaux;
     int nb_teleporteurs;
+    int nb_balles;
     char *message;
     int score;
     int sous_case;
     struct Coordonnees snoopy;
-    struct Balle balle;
     struct Coordonnees *oiseaux;
     struct Coordonnees *teleporteurs;
+    struct Balle *balles;
 };
 
 void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char derniere_direction);

@@ -38,7 +38,9 @@ void jeu(struct ModeleNiveau modele) { // Boucle principale du jeu
 
         afficher_niveau(modele, temps_arrivee - (int) time(NULL), derniere_direction); // Afficher le niveau
 
-        deplacer_balle(&modele); // Déplacer la balle
+        for(int i=0; i<modele.nb_balles; i++) {
+            deplacer_balle(&modele, i); // Déplacer la balle
+        }
         if(strlen(modele.message)) { // Si un message doit être affiché
             wprintf(L"Message: \n"); // Afficher le message
             COULEUR(ROUGE_FLUO, NOIR); // Couleur rouge
@@ -46,9 +48,11 @@ void jeu(struct ModeleNiveau modele) { // Boucle principale du jeu
             COULEUR(TURQUOISE, NOIR);
         }
         afficher_vies(modele.vies_restantes); // Afficher les vies
-        if(modele.balle.x == modele.snoopy.x && modele.balle.y == modele.snoopy.y && modele.vies_restantes) { // Si la balle touche Snoopy
-            modele.vies_restantes--; // On enlève une vie
-            modele.message = "La balle vous a touche, vous avez perdu une vie !"; // On affiche un message
+        for(int i=0; i<modele.nb_balles; i++) {
+            if(modele.balles[i].x == modele.snoopy.x && modele.balles[i].y == modele.snoopy.y && modele.vies_restantes) { // Si la balle touche Snoopy
+                modele.vies_restantes--; // On enlève une vie
+                modele.message = "La balle vous a touche, vous avez perdu une vie !"; // On affiche un message
+            }
         }
         usleep(250000); // On attend 250ms (0.25s)
     }

@@ -49,9 +49,13 @@ void sauvegarder_partie(struct ModeleNiveau modele, int temps_restant, char* che
     fprintf(fichier, "%d\n", modele.vies_restantes); // On écrit les vies restantes
     fprintf(fichier, "%d\n", modele.score); // On écrit le score
     fprintf(fichier, "%d\n", modele.sous_case); // On écrit la sous-case
-    fprintf(fichier, "%d\n", modele.balle.x); // On écrit la position x de la balle
-    fprintf(fichier, "%d\n", modele.balle.y); // On écrit la position y de la balle
-    fprintf(fichier, "%d", modele.balle.direction); // On écrit la direction de la balle
+    fprintf(fichier, "%d", modele.nb_balles); // On écrit la sous-case
+
+    for(int i = 0; i < modele.nb_balles; i++) {
+        fprintf(fichier, "\n%d", modele.balles[i].x); // On écrit la position x de la balle
+        fprintf(fichier, "\n%d", modele.balles[i].y); // On écrit la position y de la balle
+        fprintf(fichier, "\n%d", modele.balles[i].direction); // On écrit la direction de la balle
+    };
 //    Ajout de la matrice
     for (int i = 0; i < modele.hauteur; i++) { // Pour chaque ligne
         fprintf(fichier, "\n"); // On saute une ligne

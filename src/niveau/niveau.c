@@ -71,17 +71,20 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) { // Récupère le m
     }
 
     struct Coordonnees snoopy = {0, 0}; // On prépare la mémoire pour stocker les coordonnées de Snoopy
-    struct Balle balle = {1, 1, 0}; // Direction: 0 = Sud Est, 1 = Sud Ouest, 2 = Nord Ouest, 3 = Nord Est
     struct Coordonnees *oiseaux = malloc(4 * sizeof(struct Coordonnees)); // On prépare la mémoire pour stocker les coordonnées des oiseaux
-
-    int nb_oiseaux = 0; // On initialise le nombre d'oiseaux à 0
-    int nb_teleporteurs = 0; // On initialise le nombre de téléporteurs à 0
 
     int temps_restant = 0; // On initialise le temps restant à 0
     int niveau = atoi(id); // On convertit l'id du niveau en entier
     int nb_vies = 3; // On initialise le nombre de vies à 3
     int score = 0; // On initialise le score à 0
     int sous_case = 0; // On initialise la sous case à 0
+
+    int nb_oiseaux = 0; // On initialise le nombre d'oiseaux à 0
+    int nb_teleporteurs = 0; // On initialise le nombre de téléporteurs à 0
+    int nb_balles = 0; // On initialise le nombre de balles à 0
+
+
+    struct Balle *balles = malloc(1 * sizeof(struct Balle)); // On prépare la mémoire pour stocker les balles
 
     FILE *fichier = fopen(path, "r"); // On ouvre le fichier
     if(fichier == NULL) // Si le fichier n'existe pas
@@ -93,8 +96,11 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) { // Récupère le m
         // NB_VIES\n
         // SCORE\n
         // SOUS_CASE\n
-        // BALLEX\n
-        // BALLEY\n
+        // NB_BALLES\n
+        // X\n
+        // Y\n
+        // DIRECTION\n
+        // ...
 
         char ligne[100]; // On prépare la mémoire pour stocker une ligne du fichier
         fgets(ligne, sizeof ligne, fichier); // On récupère la première ligne du fichier
@@ -113,18 +119,31 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) { // Récupère le m
         sous_case = atoi(ligne); // On stocke la sous case
 
         fgets(ligne, sizeof ligne, fichier); // On récupère la sixième ligne du fichier
-        balle.x = atoi(ligne); // On stocke la position x de la balle
-        fgets(ligne, sizeof ligne, fichier); // On récupère la septième ligne du fichier
-        balle.y = atoi(ligne); // On stocke la position y de la balle
-        fgets(ligne, sizeof ligne, fichier); // On récupère la huitième ligne du fichier
-        balle.direction = atoi(ligne); // On stocke la direction de la balle
+        nb_balles = atoi(ligne); // On stocke le nombre de balles
 
+        balles = malloc(nb_balles * sizeof(struct Balle)); // On prépare la mémoire pour stocker les balles
+        for(int i = 0; i < nb_balles; i++) { // On parcourt les balles
+            struct Balle balle = {0, 0, 0}; // On prépare la mémoire pour stocker les coordonnées et la direction de la balle
+            fgets(ligne, sizeof ligne, fichier); // On récupère la ligne du fichier
+            balle.x = atoi(ligne); // On stocke la position x de la balle
+            fgets(ligne, sizeof ligne, fichier); // On récupère la ligne du fichier
+            balle.y = atoi(ligne); // On stocke la position y de la balle
+            fgets(ligne, sizeof ligne, fichier); // On récupère la ligne du fichier
+            balle.direction = atoi(ligne); // On stocke la direction de la balle
+
+            balles[i] = balle; // On stocke la balle dans le tableau de balles
+
+            // On affiche les valeurs
+            wprintf(L"(%d) x: %d, y: %d, direction: %d\n", i, balle.x, balle.y, balle.direction);
+        }
     } else id = (char *)time(NULL); // Si on charge un niveau, on stocke l'id de la partie en cours
+
 
     struct Dimensions dimensions = dimensions_niveau(niveau); // On récupère les dimensions du niveau
 
     int **modele = malloc(dimensions.hauteur * sizeof(int *)); // On prépare la mémoire pour stocker le modèle du niveau
 
+    int nb_balles2 = 0;
     for(int i = 0; i < dimensions.hauteur; i++) { // On parcourt les lignes du fichier
         modele[i] = malloc(dimensions.largeur * sizeof(int)); // On prépare la mémoire pour stocker les colonnes du modèle
         for(int j = 0; j < dimensions.largeur; j++) { // On parcourt les colonnes du fichier
@@ -134,8 +153,10 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) { // Récupère le m
                     c = fgetc(fichier); // On récupère le caractère suivant
                     break;
                 case '5': // Si le caractère est un téléporteur
-                    modele[i][j] = 5; // On stocke le caractère dans le modèle
                     nb_teleporteurs++; // On incrémente le nombre de téléporteurs
+                    break;
+                case '7': // Si le caractère est la balle
+                    nb_balles2++;
                     break;
                 case '8': // Si le caractère est Snoopy
                     snoopy.x = j; // On stocke la position x de Snoopy
@@ -151,13 +172,24 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) { // Récupère le m
         }
     }
 
+    if(!sauvegarde) balles = malloc(nb_balles2 * sizeof(struct Balle)); // On prépare la mémoire pour stocker les balles
+
     struct Coordonnees *teleporteurs = malloc(nb_teleporteurs * sizeof(struct Coordonnees)); // On prépare la mémoire pour stocker les coordonnées des téléporteurs
 
     int nb_teleporteurs2 = 0; // On initialise le nombre de téléporteurs à 0
+    nb_balles2 = 0; // On réinitialise le nombre de balles à 0
     for(int i = 1; i < dimensions.hauteur-1; i++) // On parcourt les lignes du modèle
-        for(int j = 1; j < dimensions.largeur-1; j++) // On parcourt les colonnes du modèle
-            if(modele[i][j] == 5) teleporteurs[nb_teleporteurs2++] = (struct Coordonnees) {j, i}; // On stocke les coordonnées des téléporteurs
-
+        for(int j = 1; j < dimensions.largeur-1; j++) { // On parcourt les colonnes du modèle
+            if (modele[i][j] == 5)
+                teleporteurs[nb_teleporteurs2++] = (struct Coordonnees) {j, i}; // On stocke les coordonnées des téléporteurs
+            if (modele[i][j] == 7) {
+                struct Balle balle = {0, 0, rand() % 4}; // On prépare la mémoire pour stocker les coordonnées et la direction de la balle
+                balle.x = j; // On stocke la position x de la balle
+                balle.y = i; // On stocke la position y de la balle
+                balles[nb_balles2++] = balle; // On stocke la balle dans le tableau de balles
+                modele[i][j] = 0;
+            }
+        }
     char message[500]; // On prépare la mémoire pour stocker le message
 
     struct ModeleNiveau result = { // On retourne le modèle du niveau
@@ -170,18 +202,20 @@ struct ModeleNiveau modele_niveau(char *id, int sauvegarde) { // Récupère le m
             nb_vies,
             nb_oiseaux,
             nb_teleporteurs,
+            nb_balles | nb_balles2,
             message,
             score,
             sous_case,
             snoopy,
-            balle,
             oiseaux,
-            teleporteurs
+            teleporteurs,
+            balles
     };
     return result;
 }
 
 void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char derniere_direction) { // Affiche le niveau
+
     // Calcul du temps restant en pourcentage (pourcentage de la barre verte)
     float temps_restant_prct = (float)(temps_restant * 100) / (float)120;
     // Calcul du nombre d'unités rouges
@@ -204,11 +238,17 @@ void afficher_niveau(struct ModeleNiveau modele, int temps_restant, char dernier
                 int z = affiche_unite(indice_unite, unites_rouges); // On affiche une unité du chrono (rouge ou verte)
                 if(z) indice_unite++; // Si l'unité est rouge, on incrémente l'indice de l'unité
             } else { // Si on est sur une autre colonne (donc le contenu du niveau)
-                if(modele.balle.y == i && modele.balle.x == j) { // Si on est sur la balle
-                    COULEUR(BLANC, NOIR); // On met la couleur en blanc
-                    wprintf(L"●"); // On affiche la balle
-                    COULEUR(TURQUOISE, NOIR); // On remet la couleur par défaut
-                } else switch(modele.modele[i][j]) { // On affiche le contenu de la case
+                int est_sur_balle = 0;
+                for(int k=0; k < modele.nb_balles; k++) {
+                    if(modele.balles[k].x == j && modele.balles[k].y == i) {
+                        est_sur_balle = 1;
+                        COULEUR(BLANC, NOIR); // On met la couleur en blanc
+                        wprintf(L"●"); // On affiche la balle
+                        COULEUR(TURQUOISE, NOIR); // On remet la couleur par défaut
+                        break;
+                    }
+                }
+                if(!est_sur_balle) switch(modele.modele[i][j]) { // On affiche le contenu de la case
                     case 0: // Si la case est vide
                         wprintf(L" ");
                         break;
