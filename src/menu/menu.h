@@ -8,7 +8,6 @@ int selectionne_option();
 
 // OPTION SELECTIONNEES
 void afficher_regles();
-void charger_niveau();
 void scores();
 void quitter();
 
