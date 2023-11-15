@@ -37,9 +37,6 @@ void deplacer(struct ModeleNiveau *modele, char direction, char *derniere_direct
             break;
     }
 
-    wprintf(L"%d", modele->sous_case);
-    sleep(1);
-
     // On stock les coordonnees de l'ancien snoopy pour pouvoir savoir si la balle a touche snoopy
     struct Coordonnees ancien_snoopy = (struct Coordonnees) { modele->snoopy.x, modele->snoopy.y };
 

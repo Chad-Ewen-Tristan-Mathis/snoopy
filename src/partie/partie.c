@@ -20,7 +20,7 @@ void nouvelle_partie(char *id) { // id = nom du fichier de sauvegarde
 void jeu(struct ModeleNiveau modele) { // Boucle principale du jeu
     // Affiche le temps restant
     system("cls"); // Clear la console
-    int temps_arrivee = modele.temps_restant < 120 ? (int)time(NULL) + modele.temps_restant : nouveau_chrono(); // Temps d'arrivée = temps actuel + 120 secondes
+    int temps_arrivee = modele.temps_restant > 0 ? (int)time(NULL) + modele.temps_restant : nouveau_chrono(); // Temps d'arrivée = temps actuel + 120 secondes
     int pause = 0; // On initialise la pause à 0 (non-pause)
     int menu_principal = 0; // On initialise le menu principal à 0 (non-ouvert)
 

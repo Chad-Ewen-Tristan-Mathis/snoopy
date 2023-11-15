@@ -56,10 +56,14 @@ void afficher_regles() { // Affiche les règles
 void scores() {
     system("cls"); // Efface le terminal
     // wprintf: affiche du texte en unicode (L"..." pour les chaines de caractères unicode, %ls pour les chaines de caractères unicode dans un printf, notamment pour les symboles)
-    wprintf(L"Scores :\n"); // Affiche les scores
+    wprintf(L"Malheureusement, les scores ne sont pas encore disponibles...\nNous ne savons pas a quoi sert cette commande !"); // Affiche un message
+    usleep(250000); // Attend 1 seconde
+    system("cls"); // Efface le terminal
+    afficher_fichier("../assets/ASCII/logo.txt"); // Affiche le logo
+    menu(); // Relance le menu
 }
 void quitter() { // Quitte le jeu
     afficher_fichier("../assets/ASCII/quitter.txt"); // Affiche le fichier quitter.txt
-    sleep(1); // Attend 1 seconde
+    sleep(3); // Attend 1 seconde
     exit(0); // Quitte le programme
 }
