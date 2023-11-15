@@ -14,7 +14,7 @@
 
 // Lorsque l'utilisateur appuie sur une touche, on regarde quelle touche a été appuyée et on effectue l'action correspondante
 void handleKeypress(struct ModeleNiveau *modele, int *temps_arrivee, int *pause, int *menu_principal, char *derniere_direction) {
-    if(kbhit()) { // Si une touche a été appuyée
+    if(kbhit()) { // Si une touche a été appuyée (kbhit = keyboard hit : clavier pressé)
         switch(getch()) { // On regarde quelle touche a été appuyée
             case 'p': // Pause
                 if(*pause == 0) { // Si le jeu n'est pas déjà en pause

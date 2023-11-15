@@ -37,6 +37,9 @@ void deplacer(struct ModeleNiveau *modele, char direction, char *derniere_direct
             break;
     }
 
+    wprintf(L"%d", modele->sous_case);
+    sleep(1);
+
     // On stock les coordonnees de l'ancien snoopy pour pouvoir savoir si la balle a touche snoopy
     struct Coordonnees ancien_snoopy = (struct Coordonnees) { modele->snoopy.x, modele->snoopy.y };
 
@@ -50,7 +53,7 @@ void deplacer(struct ModeleNiveau *modele, char direction, char *derniere_direct
         modele->snoopy.x += add_x;
         modele->sous_case = modele->modele[modele->snoopy.y][modele->snoopy.x]; // On stock l'état de la case sous snoopy
         modele->modele[modele->snoopy.y][modele->snoopy.x] = 8; // On met snoopy sur la case
-    } else if(nouvelle_case == 5) { // Bloc apparition/disparition
+    } else if(nouvelle_case == 5) { // Bloc teleportation
         modele->modele[modele->snoopy.y][modele->snoopy.x] = modele->sous_case; // On remet l'état de la case sur laquelle était snoopy
         modele->sous_case = 5; // On remet l'état de la case sous snoopy a 5 (case apparition/disparition)
         teleportation(modele, modele->snoopy.x+add_x, modele->snoopy.y+add_y); // On teleporte snoopy
@@ -215,6 +218,7 @@ void tapis_roulant(struct ModeleNiveau *modele, int x, int y, int direction) { /
     } else if(nouvelle_case == 5) { // Bloc apparition/disparition
         teleportation(modele, x+add_x, y+add_y); // On teleporte snoopy
     } else if(nouvelle_case == 6) { // Tapis roulant
+        modele->sous_case = 5;
         tapis_roulant(modele, x+add_x, y+add_y, direction); // On deplace snoopy
     } else if(nouvelle_case == 9) { // Oiseau
         modele->snoopy.y = y+add_y; // On ajoute les coordonnees
@@ -222,10 +226,11 @@ void tapis_roulant(struct ModeleNiveau *modele, int x, int y, int direction) { /
         modele->modele[modele->snoopy.y][modele->snoopy.x] = 8; // On met snoopy sur la case
         modele->sous_case = 0; // On remet l'état de la case sous snoopy a 0 (case vide)
         oiseau(modele); // On fait disparaitre l'oiseau
-    } else {
+    } else { // Si la case est un bloc sur lequel snoopy ne peut pas aller (bloc piege, bloc indestructible, etc)
+        modele->modele[modele->snoopy.y][modele->snoopy.x] = modele->sous_case; // On remet l'état de la case sur laquelle était snoopy
         modele->snoopy.y = y; // On ajoute les coordonnees
         modele->snoopy.x = x;
-        modele->sous_case = modele->modele[modele->snoopy.y][modele->snoopy.x]; // On stock l'état de la case sous snoopy
         modele->modele[modele->snoopy.y][modele->snoopy.x] = 8; // On met snoopy sur la case
+        modele->sous_case = 5;
     }
 }

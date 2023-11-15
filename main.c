@@ -9,7 +9,7 @@
 
 
 int main() {
-    // Console en UTF-8
+    // Console en UTF-8 (utilise wprintf au lieu de printf, et les librairies unicode "fcntl.h" et "io.h")
     _setmode(_fileno(stdout), _O_U16TEXT);
     // Couleur du texte en Turquoise
     COULEUR(TURQUOISE, NOIR);

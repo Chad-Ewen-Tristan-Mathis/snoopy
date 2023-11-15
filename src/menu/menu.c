@@ -53,7 +53,11 @@ void afficher_regles() { // Affiche les règles
     afficher_fichier("../assets/ASCII/regles.txt"); // Affiche le fichier regles.txt
     menu(); // Relance le menu
 }
-void scores() {}
+void scores() {
+    system("cls"); // Efface le terminal
+    // wprintf: affiche du texte en unicode (L"..." pour les chaines de caractères unicode, %ls pour les chaines de caractères unicode dans un printf, notamment pour les symboles)
+    wprintf(L"Scores :\n"); // Affiche les scores
+}
 void quitter() { // Quitte le jeu
     afficher_fichier("../assets/ASCII/quitter.txt"); // Affiche le fichier quitter.txt
     sleep(1); // Attend 1 seconde
